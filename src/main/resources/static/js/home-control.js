@@ -16,7 +16,6 @@ function healthCheck() {
 			});
 }
 
-
 function deleteUser(userId) {
 	$.ajax(
 			{
@@ -81,4 +80,29 @@ function getUser(userId) {
 	} else {
 		alert("Invalid user Id");
 	}
+}
+
+
+//Reminder Group
+//Hardeep
+function validateInput(uName) {
+    var uName = $('#rUserName').val();
+    if(uName) {
+        $.ajax(
+            {
+                type : "GET",
+                url  : "/cs580/reminder/" + uName,
+                data : {
+                },
+                success : function (result) {
+                    $('#checkResult').text(result)
+
+                },
+                error: function (jqXHR, exception) {
+                    alert("Failed to get validation");
+                }
+            });
+    } else {
+        alert("Username field is empty");
+    }
 }

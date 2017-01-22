@@ -133,4 +133,19 @@ public class WebController {
 		return modelAndView;
 	}
 
+    /**
+     *
+     * Checks Username validation required for login page
+     * @param uName
+     * @return validation
+     */
+	@RequestMapping(value = "/cs580/reminder/{uName}", method = RequestMethod.GET)
+	String validateInput(@PathVariable("uName") String uName){
+		if(uName.contains("@")) {
+		    return "Valid";
+        } else {
+		    return "Invalid";
+        }
+	}
+
 }
