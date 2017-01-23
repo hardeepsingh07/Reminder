@@ -158,5 +158,13 @@ public class WebController {
 		ModelAndView modelAndView = new ModelAndView("success");
 		return modelAndView;
 	}
+
+
+	 @RequestMapping(value = "/logOutSuccess")
+    ModelAndView GG() {
+		ModelAndView modelAndView = new ModelAndView("logOutSuccess");
+		return modelAndView;
+	}
+    
     
 }
