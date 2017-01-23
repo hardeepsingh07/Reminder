@@ -161,7 +161,7 @@ public class WebController {
 
 
 	 @RequestMapping(value = "/logOutSuccess")
-    ModelAndView GG() {
+    ModelAndView logOutSuccessMV() {
 		ModelAndView modelAndView = new ModelAndView("logOutSuccess");
 		return modelAndView;
 	}
