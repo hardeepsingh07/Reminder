@@ -105,4 +105,8 @@ function validateInput(uName) {
     } else {
         alert("Username field is empty");
     }
+
+
+
+
 }

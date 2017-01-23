@@ -147,5 +147,16 @@ public class WebController {
 		    return "Invalid";
         }
 	}
-
+	
+    @RequestMapping(value = "/login")
+    ModelAndView test() {
+		ModelAndView modelAndView = new ModelAndView("login");
+		return modelAndView;
+	}
+    @RequestMapping(value = "/success")
+    ModelAndView GG() {
+		ModelAndView modelAndView = new ModelAndView("success");
+		return modelAndView;
+	}
+    
 }
