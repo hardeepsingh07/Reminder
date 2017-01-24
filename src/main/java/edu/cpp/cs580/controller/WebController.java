@@ -165,6 +165,12 @@ public class WebController {
 		ModelAndView modelAndView = new ModelAndView("logOutSuccess");
 		return modelAndView;
 	}
+
+	@RequestMapping(value = "/forgotPassword")
+	ModelAndView forgotPasswordMV() {
+		ModelAndView modelAndView = new ModelAndView("forgotPassword");
+		return modelAndView;
+	}
     
     
 }
