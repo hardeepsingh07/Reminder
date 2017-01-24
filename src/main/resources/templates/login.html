@@ -1,5 +1,7 @@
 <html>
 <head>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="/js/home-control.js"></script>
 <title>test</title>
 
 </head>
@@ -11,6 +13,8 @@
 			<div class="col-sm-9">
 				<input type="email" class="form-control" id="username"
 					name="username" placeholder="Email"></input>
+				<button id="validation" onclick="validateInput()">Valid?</button>
+                <!--<label id="checkResult"></label>-->
 			</div>
 		</div>
 		<div class="form-group">

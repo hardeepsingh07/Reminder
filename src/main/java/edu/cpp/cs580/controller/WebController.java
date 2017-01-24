@@ -139,7 +139,7 @@ public class WebController {
      * @param uName
      * @return validation
      */
-	@RequestMapping(value = "/cs580/reminder/{uName}", method = RequestMethod.GET)
+	@RequestMapping(value = "/valid/{uName}", method = RequestMethod.GET)
 	String validateInput(@PathVariable("uName") String uName){
 		if(uName.contains("@")) {
 		    return "Valid";

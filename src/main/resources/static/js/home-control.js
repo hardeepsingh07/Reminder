@@ -86,16 +86,17 @@ function getUser(userId) {
 //Reminder Group
 //Hardeep
 function validateInput(uName) {
-    var uName = $('#rUserName').val();
+    var uName = $('#username').val();
     if(uName) {
         $.ajax(
             {
                 type : "GET",
-                url  : "/cs580/reminder/" + uName,
+                url  : "/valid/" + uName,
                 data : {
                 },
                 success : function (result) {
-                    $('#checkResult').text(result)
+                    alert("Username: " + uName + " is " + result);
+                    //$('#checkResult').text(result);
 
                 },
                 error: function (jqXHR, exception) {
