@@ -78,6 +78,14 @@
             <artifactId>jasypt</artifactId>
             <version>1.9.2</version>
         </dependency>
+        
+        
+		<!-- These are the dependency for the security From spring -->		
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+           <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        
 
 	</dependencies>
 

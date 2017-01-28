@@ -1,22 +1,24 @@
-<html>
-<head>
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-	<link rel='stylesheet' type='text/css' href='http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css'/>
-	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
-    <script src="/js/home-control.js"></script>
-
-
-<title>Login</title>
-</head>
-
-<body>
-	<div>
-		<div class="form-group">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Spring Security Example </title>
+    </head>
+    <body>
+        <div th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+        <form th:action="@{/login}" method="post">
+        
+            
+            <div class="form-group">
 			<label for="username" class="col-sm-3 control-label"> Email</label>
 			<div class="col-sm-9">
-				<input type="email" class="form-control" id="username"
+				<input type="text" class="form-control" id="username"
 					   name="username" placeholder="Email"/>
-				<button id="validation" onclick="validateInput()">Valid?</button>
                 <!--<label id="checkResult"></label>-->
 			</div>
 		</div>
@@ -26,30 +28,21 @@
 			<div class="col-sm-9">
 				<input type="password" class="form-control" id="password"
 					   name="password" placeholder="Password"/>
-                <button type="button" id="encryptPassword" onclick="encrypt()">Encrypt</button>
 			</div>
 		</div>
-		<div class="form-group last">
-			<div class="col-sm-offset-3 col-sm-9">
-				<button type="button" id="myButton">Sign in</button>
-			</div>
+            <div class="col-sm-offset-3 col-sm-9">
+            <div><input type="submit" value="Sign In"/></div>
+            </div>
+        </form>
+        
+        <div class="panel-footer">
+       	 	<label>Not Registered?</label> <a href="/success" data-toggle="modal">Registerhere</a>
 		</div>
-	</div>
-	<div class="panel-footer">
-        <label>Not Registered?</label> <a href="/success" data-toggle="modal">Register
-			here</a>
-	</div>
-    <div>
-        <a href="/forgotPassword" data-toggle="modal">Forgot Password</a>
-		<input type="date" class="form-control" id="date" placeholder="Date"/>
-	</div>
-</body>
-<script type="text/javascript">
-    document.getElementById("myButton").onclick = function () {
-        location.href = "success";
-    };
-</script>
+    </body>
 </html>
+
+
+
 
 
 

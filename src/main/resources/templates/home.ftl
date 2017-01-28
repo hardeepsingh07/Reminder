@@ -96,7 +96,8 @@
                 <label>Username: </label><input type="text" id="rUserName">
                         <button onclick="validateInput()">Validate</button>
                 <td><label id="checkResult"></label></td>
-            </div>  
+            </div>
+  
         </div>
 
 
