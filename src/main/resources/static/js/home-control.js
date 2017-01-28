@@ -1,5 +1,5 @@
 // This is the version used for regular HTML + FreeMarker with jQuery
-
+//show date picker
 function healthCheck() {
 	$.ajax(
 			{
@@ -106,8 +106,25 @@ function validateInput(uName) {
     } else {
         alert("Username field is empty");
     }
+}
 
-
-
-
+function encrypt() {
+    var password = $('#password').val();
+    if(password) {
+        $.ajax(
+            {
+                type : "GET",
+                url  : "/encrypt/" + password,
+                data : {
+                },
+                success : function (result) {
+                    alert(result)
+                },
+                error: function (jqXHR, exception) {
+                    alert("Failed to get encrypt");
+                }
+            });
+    } else {
+        alert("Password field is empty");
+    }
 }

@@ -2,6 +2,7 @@ package edu.cpp.cs580.controller;
 
 import java.util.List;
 
+import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -147,6 +148,15 @@ public class WebController {
 		    return "Invalid";
         }
 	}
+
+    @RequestMapping(value = "/encrypt/{password}", method = RequestMethod.GET)
+    String encrypt(@PathVariable("password") String password){
+        StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
+        String encryptedPassword = passwordEncryptor.encryptPassword(password);
+
+        return encryptedPassword;
+    }
+
 	
     @RequestMapping(value = "/login")
     ModelAndView test() {

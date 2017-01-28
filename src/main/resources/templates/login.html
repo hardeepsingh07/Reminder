@@ -1,9 +1,12 @@
 <html>
 <head>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<link rel='stylesheet' type='text/css' href='http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css'/>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
     <script src="/js/home-control.js"></script>
-<title>test</title>
 
+
+<title>Login</title>
 </head>
 
 <body>
@@ -12,7 +15,7 @@
 			<label for="username" class="col-sm-3 control-label"> Email</label>
 			<div class="col-sm-9">
 				<input type="email" class="form-control" id="username"
-					name="username" placeholder="Email"></input>
+					   name="username" placeholder="Email"/>
 				<button id="validation" onclick="validateInput()">Valid?</button>
                 <!--<label id="checkResult"></label>-->
 			</div>
@@ -22,17 +25,13 @@
 				Password</label>
 			<div class="col-sm-9">
 				<input type="password" class="form-control" id="password"
-					name="password" placeholder="Password"></input>
+					   name="password" placeholder="Password"/>
+                <button type="button" id="encryptPassword" onclick="encrypt()">Encrypt</button>
 			</div>
 		</div>
 		<div class="form-group last">
 			<div class="col-sm-offset-3 col-sm-9">
 				<button type="button" id="myButton">Sign in</button>
-				<script type="text/javascript">
-    									document.getElementById("myButton").onclick = function () {
-       										 location.href = "success";
-   										 };
-									</script>
 			</div>
 		</div>
 	</div>
@@ -42,11 +41,14 @@
 	</div>
     <div>
         <a href="/forgotPassword" data-toggle="modal">Forgot Password</a>
-    </div>
-
+		<input type="date" class="form-control" id="date" placeholder="Date"/>
+	</div>
 </body>
-
-
+<script type="text/javascript">
+    document.getElementById("myButton").onclick = function () {
+        location.href = "success";
+    };
+</script>
 </html>
 
 
