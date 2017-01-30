@@ -3,6 +3,7 @@ package edu.cpp.cs580.controller;
 import java.util.List;
 
 import org.jasypt.util.password.StrongPasswordEncryptor;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 import edu.cpp.cs580.App;
 import edu.cpp.cs580.data.User;
 import edu.cpp.cs580.data.provider.UserManager;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -37,6 +41,8 @@ public class WebController {
 	 */
 	@Autowired
 	private UserManager userManager;
+	
+	private static final Logger Logger = LoggerFactory.getLogger(WebController.class);
 
 	/**
 	 * This is a simple example of how the HTTP API works.
@@ -155,6 +161,12 @@ public class WebController {
         String encryptedPassword = passwordEncryptor.encryptPassword(password);
 
         return encryptedPassword;
+    }
+    
+    @RequestMapping(value = "/log/{logString}", method = RequestMethod.GET)
+    String log(@PathVariable("logString") String logString){
+        Logger.debug(logString);
+        return "Succesfully Logged "+ logString;
     }
 
 	
