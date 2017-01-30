@@ -2,6 +2,7 @@ package edu.cpp.cs580.controller;
 
 import java.util.List;
 
+
 import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,13 @@ import edu.cpp.cs580.data.provider.UserManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
 
 /**
  * This is the controller used by Spring framework.
@@ -195,4 +203,36 @@ public class WebController {
 	}
     
     
+	@RequestMapping(value = "/hyperlinks", method = RequestMethod.GET)
+	String hyper() {
+		StringBuffer html = new StringBuffer();
+
+        html.append("<!DOCTYPE html>");
+        html.append("<html lang=\"en\">");
+        html.append("<head>");
+        html.append("<meta charset=\"UTF-8\" />");
+        html.append("<title>Hollywood Life</title>");
+        html.append("<meta name=\"description\" content=\"The latest entertainment news\" />");
+        html.append("<meta name=\"keywords\" content=\"hollywood gossip, hollywood news\" />");
+        html.append("</head>");
+        html.append("<body>");
+        html.append("<div id='color'>This is red</div> />");
+        html.append("</body>");
+        html.append("</html>");
+
+        Document doc = Jsoup.parse(html.toString());
+
+        //get meta description content
+        String description = doc.select("meta[name=description]").get(0).attr("content");
+        return " This is a demo of how to get Meta description : " + description;
+                              }
+
+	        
+	         
+	        
+		
+		
 }
+	
+	 
+	
