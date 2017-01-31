@@ -12,19 +12,19 @@ import org.springframework.security.config.annotation.web.servlet.configuration.
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http
-//            .authorizeRequests()
-//            //This will list what links are not going to be authenticate so we will have to put in the registration page which i used as sample
-//                .antMatchers("/success","/cs580/ping", "/sendsms").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//             //This is the login page i think we need to change the way to do login,
-//            .formLogin()
-//                .loginPage("/login")
-//                .permitAll()
-//                .and()
-//            .logout()
-//                .permitAll();
+        http
+            .authorizeRequests()
+            //This will list what links are not going to be authenticate so we will have to put in the registration page which i used as sample
+                .antMatchers("/success","/cs580/ping", "/sendsms").permitAll()
+                .anyRequest().authenticated()
+                .and()
+             //This is the login page i think we need to change the way to do login,
+            .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .and()
+            .logout()
+                .permitAll();
     }
 
     @Autowired
