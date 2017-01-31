@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/js/home-control.js"></script>
+    <title>SMS</title>
+</head>
+<body>
+<div>
+    <label>Mobile Number</label>
+    <input id="number" type="text" placeholder="Valid Number"/>
+</div>
+
+<div>
+    <label>Service Provider</label>
+    <select id="networkProvider">
+        <option>ATT</option>
+        <option>Boost Mobile</option>
+        <option>Sprint</option>
+        <option>TMobile</option>
+        <option>Verizon</option>
+        <option>Virgin Mobile</option>
+    </select>
+</div>
+
+<div>
+    <label>Subject</label>
+    <input id="subject" type="text" placeholder="Optional"/>
+</div>
+
+<div>
+    <label>Message</label>
+    <input id="message" type="text" placeholder="Required"/>
+</div>
+
+<div>
+    <button id="send" onclick="sendSMS()">Send!</button>
+</div>
+</body>
+</html>

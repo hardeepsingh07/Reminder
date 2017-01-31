@@ -3,6 +3,7 @@ package edu.cpp.cs580.controller;
 import java.util.List;
 
 
+import edu.cpp.cs580.service.EmailService;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,179 +34,204 @@ import java.io.IOException;
  * <p>
  * The basic function of this controller is to map
  * each HTTP API Path to the correspondent method.
- *
  */
 
 @RestController
 public class WebController {
 
-	/**
-	 * When the class instance is annotated with
-	 * {@link Autowired}, it will be looking for the actual
-	 * instance from the defined beans.
-	 * <p>
-	 * In our project, all the beans are defined in
-	 * the {@link App} class.
-	 */
-	@Autowired
-	private UserManager userManager;
-	
-	private static final Logger Logger = LoggerFactory.getLogger(WebController.class);
+    /**
+     * When the class instance is annotated with
+     * {@link Autowired}, it will be looking for the actual
+     * instance from the defined beans.
+     * <p>
+     * In our project, all the beans are defined in
+     * the {@link App} class.
+     */
+    @Autowired
+    private UserManager userManager;
 
-	/**
-	 * This is a simple example of how the HTTP API works.
-	 * It returns a String "OK" in the HTTP response.
-	 * To try it, run the web application locally,
-	 * in your web browser, type the link:
-	 * 	http://localhost:8080/cs580/ping
-	 */
-	@RequestMapping(value = "/cs580/ping", method = RequestMethod.GET)
-	String healthCheck() {
-		// You can replace this with other string,
-		// and run the application locally to check your changes
-		// with the URL: http://localhost:8080/
-		return "OK-CS580";
-	}
+    @Autowired
+    EmailService service;
 
-	/**
-	 * This is a simple example of how to use a data manager
-	 * to retrieve the data and return it as an HTTP response.
-	 *
-	 * <p>
-	 * Note, when it returns from the Spring, it will be
-	 * automatically converted to JSON format.
-	 * <p>
-	 * Try it in your web browser:
-	 * 	http://localhost:8080/cs580/user/user101
-	 */
-	@RequestMapping(value = "/cs580/user/{userId}", method = RequestMethod.GET)
-	User getUser(@PathVariable("userId") String userId) {
-		User user = userManager.getUser(userId);
-		return user;
-	}
-
-	/**
-	 * This is an example of sending an HTTP POST request to
-	 * update a user's information (or create the user if not
-	 * exists before).
-	 *
-	 * You can test this with a HTTP client by sending
-	 *  http://localhost:8080/cs580/user/user101
-	 *  	name=John major=CS
-	 *
-	 * Note, the URL will not work directly in browser, because
-	 * it is not a GET request. You need to use a tool such as
-	 * curl.
-	 *
-	 * @param id
-	 * @param name
-	 * @param major
-	 * @return
-	 */
-	@RequestMapping(value = "/cs580/user/{userId}", method = RequestMethod.POST)
-	User updateUser(
-			@PathVariable("userId") String id,
-			@RequestParam("name") String name,
-			@RequestParam(value = "major", required = false) String major) {
-		User user = new User();
-		user.setId(id);
-		user.setMajor(major);
-		user.setName(name);
-		userManager.updateUser(user);
-		return user;
-	}
-
-	/**
-	 * This API deletes the user. It uses HTTP DELETE method.
-	 *
-	 * @param userId
-	 */
-	@RequestMapping(value = "/cs580/user/{userId}", method = RequestMethod.DELETE)
-	void deleteUser(
-			@PathVariable("userId") String userId) {
-		userManager.deleteUser(userId);
-	}
-
-	/**
-	 * This API lists all the users in the current database.
-	 *
-	 * @return
-	 */
-	@RequestMapping(value = "/cs580/users/list", method = RequestMethod.GET)
-	List<User> listAllUsers() {
-		return userManager.listAllUsers();
-	}
-
-	/*********** Web UI Test Utility **********/
-	/**
-	 * This method provide a simple web UI for you to test the different
-	 * functionalities used in this web service.
-	 */
-	@RequestMapping(value = "/cs580/home", method = RequestMethod.GET)
-	ModelAndView getUserHomepage() {
-		ModelAndView modelAndView = new ModelAndView("home");
-		modelAndView.addObject("users", listAllUsers());
-		return modelAndView;
-	}
+    private static final Logger Logger = LoggerFactory.getLogger(WebController.class);
 
     /**
+     * This is a simple example of how the HTTP API works.
+     * It returns a String "OK" in the HTTP response.
+     * To try it, run the web application locally,
+     * in your web browser, type the link:
+     * http://localhost:8080/cs580/ping
+     */
+    @RequestMapping(value = "/cs580/ping", method = RequestMethod.GET)
+    String healthCheck() {
+        // You can replace this with other string,
+        // and run the application locally to check your changes
+        // with the URL: http://localhost:8080/
+        return "OK-CS580";
+    }
+
+    /**
+     * This is a simple example of how to use a data manager
+     * to retrieve the data and return it as an HTTP response.
+     * <p>
+     * <p>
+     * Note, when it returns from the Spring, it will be
+     * automatically converted to JSON format.
+     * <p>
+     * Try it in your web browser:
+     * http://localhost:8080/cs580/user/user101
+     */
+    @RequestMapping(value = "/cs580/user/{userId}", method = RequestMethod.GET)
+    User getUser(@PathVariable("userId") String userId) {
+        User user = userManager.getUser(userId);
+        return user;
+    }
+
+    /**
+     * This is an example of sending an HTTP POST request to
+     * update a user's information (or create the user if not
+     * exists before).
+     * <p>
+     * You can test this with a HTTP client by sending
+     * http://localhost:8080/cs580/user/user101
+     * name=John major=CS
+     * <p>
+     * Note, the URL will not work directly in browser, because
+     * it is not a GET request. You need to use a tool such as
+     * curl.
      *
+     * @param id
+     * @param name
+     * @param major
+     * @return
+     */
+    @RequestMapping(value = "/cs580/user/{userId}", method = RequestMethod.POST)
+    User updateUser(
+            @PathVariable("userId") String id,
+            @RequestParam("name") String name,
+            @RequestParam(value = "major", required = false) String major) {
+        User user = new User();
+        user.setId(id);
+        user.setMajor(major);
+        user.setName(name);
+        userManager.updateUser(user);
+        return user;
+    }
+
+    /**
+     * This API deletes the user. It uses HTTP DELETE method.
+     *
+     * @param userId
+     */
+    @RequestMapping(value = "/cs580/user/{userId}", method = RequestMethod.DELETE)
+    void deleteUser(
+            @PathVariable("userId") String userId) {
+        userManager.deleteUser(userId);
+    }
+
+    /**
+     * This API lists all the users in the current database.
+     *
+     * @return
+     */
+    @RequestMapping(value = "/cs580/users/list", method = RequestMethod.GET)
+    List<User> listAllUsers() {
+        return userManager.listAllUsers();
+    }
+
+    /*********** Web UI Test Utility **********/
+    /**
+     * This method provide a simple web UI for you to test the different
+     * functionalities used in this web service.
+     */
+    @RequestMapping(value = "/cs580/home", method = RequestMethod.GET)
+    ModelAndView getUserHomepage() {
+        ModelAndView modelAndView = new ModelAndView("home");
+        modelAndView.addObject("users", listAllUsers());
+        return modelAndView;
+    }
+
+    /**
      * Checks Username validation required for login page
+     *
      * @param uName
      * @return validation
      */
-	@RequestMapping(value = "/valid/{uName}", method = RequestMethod.GET)
-	String validateInput(@PathVariable("uName") String uName){
-		if(uName.contains("@")) {
-		    return "Valid";
+    @RequestMapping(value = "/valid/{uName}", method = RequestMethod.GET)
+    String validateInput(@PathVariable("uName") String uName) {
+        if (uName.contains("@")) {
+            return "Valid";
         } else {
-		    return "Invalid";
+            return "Invalid";
         }
-	}
+    }
 
     @RequestMapping(value = "/encrypt/{password}", method = RequestMethod.GET)
-    String encrypt(@PathVariable("password") String password){
+    String encrypt(@PathVariable("password") String password) {
         StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
         String encryptedPassword = passwordEncryptor.encryptPassword(password);
 
         return encryptedPassword;
     }
-    
-    @RequestMapping(value = "/log/{logString}", method = RequestMethod.GET)
-    String log(@PathVariable("logString") String logString){
-        Logger.debug(logString);
-        return "Succesfully Logged "+ logString;
+
+    @RequestMapping(value = "/sendsms")
+    ModelAndView loadSendEmail() {
+        ModelAndView modelAndView = new ModelAndView("sms");
+        return modelAndView;
     }
 
-	
+    @RequestMapping(value = "/processSMS/{number}", method = RequestMethod.GET)
+    String sendEmail(@PathVariable("number") String number,
+                     @RequestParam("provider") String provider,
+                     @RequestParam("subject") String subject,
+                     @RequestParam("message") String message) {
+
+        //Use service class to send email
+        try {
+            service.sendSMS(number, provider, subject, message);
+        } catch (Exception e) {
+            return "error";
+        }
+        return "success";
+    }
+
+
+    @RequestMapping(value = "/log/{logString}", method = RequestMethod.GET)
+    String log(@PathVariable("logString") String logString) {
+        Logger.debug(logString);
+        return "Succesfully Logged " + logString;
+    }
+
+
     @RequestMapping(value = "/login")
     ModelAndView test() {
-		ModelAndView modelAndView = new ModelAndView("login");
-		return modelAndView;
-	}
+        ModelAndView modelAndView = new ModelAndView("login");
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/success")
     ModelAndView GG() {
-		ModelAndView modelAndView = new ModelAndView("success");
-		return modelAndView;
-	}
+        ModelAndView modelAndView = new ModelAndView("success");
+        return modelAndView;
+    }
 
 
-	 @RequestMapping(value = "/logOutSuccess")
+    @RequestMapping(value = "/logOutSuccess")
     ModelAndView logOutSuccessMV() {
-		ModelAndView modelAndView = new ModelAndView("logOutSuccess");
-		return modelAndView;
-	}
+        ModelAndView modelAndView = new ModelAndView("logOutSuccess");
+        return modelAndView;
+    }
 
-	@RequestMapping(value = "/forgotPassword")
-	ModelAndView forgotPasswordMV() {
-		ModelAndView modelAndView = new ModelAndView("forgotPassword");
-		return modelAndView;
-	}
-    
-    
-	@RequestMapping(value = "/hyperlinks", method = RequestMethod.GET)
-	String hyper() {
-		StringBuffer html = new StringBuffer();
+    @RequestMapping(value = "/forgotPassword")
+    ModelAndView forgotPasswordMV() {
+        ModelAndView modelAndView = new ModelAndView("forgotPassword");
+        return modelAndView;
+    }
+
+
+    @RequestMapping(value = "/hyperlinks", method = RequestMethod.GET)
+    String hyper() {
+        StringBuffer html = new StringBuffer();
 
         html.append("<!DOCTYPE html>");
         html.append("<html lang=\"en\">");
@@ -225,14 +251,8 @@ public class WebController {
         //get meta description content
         String description = doc.select("meta[name=description]").get(0).attr("content");
         return " This is a demo of how to get Meta description : " + description;
-                              }
-
-	        
-	         
-	        
-		
-		
+    }
 }
-	
+
 	 
 	
