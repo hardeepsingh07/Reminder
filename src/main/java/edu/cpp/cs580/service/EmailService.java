@@ -5,6 +5,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.util.Random;
+
 /**
  * Created by hardeepsingh on 1/24/17.
  */
@@ -19,6 +21,39 @@ public class EmailService {
     }
 
     public void sendSMS(String number, String provider, String subject, String message) {
+        String dAddresss = getSMSAddress(provider, number);
+
+        //send email via SMS
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(dAddresss);
+        mailMessage.setFrom(appEmail);
+        mailMessage.setSubject(subject);
+        mailMessage.setText(message);
+
+        javaMailSender.send(mailMessage);
+    }
+
+    public String registerUser(String name, String email, String provider, String number) {
+        String dAddresss = getSMSAddress(provider, number);
+
+        Random r = new Random();
+        int low = 5000;
+        int high = 10000;
+        int result = r.nextInt(high - low) + low;
+
+        //send email via SMS
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(dAddresss);
+        mailMessage.setFrom(appEmail);
+        mailMessage.setSubject("Verification Code: " + result);
+        mailMessage.setText(name + ", Thank you for registering with Reminder");
+
+        javaMailSender.send(mailMessage);
+
+        return result + "";
+    }
+
+    public String getSMSAddress(String provider, String number) {
         String sendEmail;
         switch (provider) {
             case "ATT":
@@ -39,18 +74,12 @@ public class EmailService {
             case "Virgin Mobile":
                 sendEmail = number + "@vmobl.com";
                 break;
-                default:
-                    //Verizon as default
-                    sendEmail = number + "@vtext.com";
+            default:
+                //Verizon as default
+                sendEmail = number + "@vtext.com";
         }
-
-        //send email via SMS
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setTo(sendEmail);
-        mailMessage.setFrom(appEmail);
-        mailMessage.setSubject(subject);
-        mailMessage.setText(message);
-
-        javaMailSender.send(mailMessage);
+        return sendEmail;
     }
+
+
 }

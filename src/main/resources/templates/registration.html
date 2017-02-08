@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/js/registration-control.js"></script>
+    <title>Registration</title>
+</head>
+<body>
+<div>
+    <label>Name: </label>
+    <input id="rName" type="text" placeholder="Required" value="Hardeep"/>
+</div>
+
+<div>
+    <label>Email: </label>
+    <input id="rEmail" type="text" placeholder="Required" value="hardeep07@yahoo.com"/>
+</div>
+
+
+<div>
+    <label>Service Provider</label>
+    <select id="rProvider">
+        <option>ATT</option>
+        <option>Boost Mobile</option>
+        <option>Sprint</option>
+        <option>TMobile</option>
+        <option>Verizon</option>
+        <option>Virgin Mobile</option>
+    </select>
+</div>
+
+
+<div>
+    <label>Phone Number: </label>
+    <input id="rNumber" type="text" placeholder="Required" value="9096497670"/>
+</div>
+
+<div>
+    <button id="rSubmit" onclick="handleRegistration()">Submit!</button>
+</div>
+
+</body>
+</html>

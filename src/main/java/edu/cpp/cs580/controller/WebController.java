@@ -39,6 +39,8 @@ import java.io.IOException;
 @RestController
 public class WebController {
 
+    private String code;
+
     /**
      * When the class instance is annotated with
      * {@link Autowired}, it will be looking for the actual
@@ -195,13 +197,48 @@ public class WebController {
         return "success";
     }
 
+    //Registration
+    @RequestMapping(value = "/registration")
+    ModelAndView loadRegistration() {
+        ModelAndView modelAndView = new ModelAndView("registration");
+        return modelAndView;
+    }
 
+    @RequestMapping(value = "/processRegistration/{rName}", method = RequestMethod.GET)
+    String register(@PathVariable("rName") String rName,
+                    @RequestParam("rEmail") String rEmail,
+                    @RequestParam("rProvider") String rProvider,
+                    @RequestParam("rNumber") String rNumber) {
+
+        try {
+            code = service.registerUser(rName, rEmail, rProvider, rNumber);
+        } catch (Exception e) {
+            return "error";
+        }
+        return "success";
+    }
+
+    //load validation
+    @RequestMapping(value = "/verificationCode")
+    ModelAndView verificationCode() {
+        ModelAndView modelAndView = new ModelAndView("verificationCode");
+        return modelAndView;
+    }
+
+    //Verify Code
+    @RequestMapping(value = "/validateCode/{vCode}", method = RequestMethod.GET)
+    String validateCode(@PathVariable("vCode") String vCode) {
+        if(Integer.parseInt(code) == Integer.parseInt(vCode)) {
+            return "valid";
+        }
+        return "invalid";
+    }
+    
     @RequestMapping(value = "/log/{logString}", method = RequestMethod.GET)
     String log(@PathVariable("logString") String logString) {
         Logger.debug(logString);
         return "Succesfully Logged " + logString;
     }
-
 
     @RequestMapping(value = "/login")
     ModelAndView test() {
