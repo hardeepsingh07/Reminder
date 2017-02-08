@@ -6,35 +6,43 @@ function handleRegistration() {
 
     var rName = $('#rName').val();
     var rEmail = $('#rEmail').val();
+    var rPassword = $('#rPassword').val();
+    var rConfirmPassword = $('#rConfirmPassword').val();
     var rProvider = $('#rProvider').val();
     var rNumber = $('#rNumber').val();
 
-    if(rName && rEmail && rProvider && rNumber) {
-        $.ajax(
-            {
-                type : "GET",
-                url  : "/processRegistration/" + rName,
-                data : {
-                    "rEmail"    : rEmail,
-                    "rProvider" : rProvider,
-                    "rNumber"   : rNumber
-                },
-                success : function (result) {
-                    if(result === 'error') {
-                        $('#rSubmit').prop("disabled", true);
-                        alert("Error occurred, Try again later.");
-                    } else {
-                        alert("Validation code sent to provided number");
-                        window.location.replace("/verificationCode");
+    if(rName && rEmail && rProvider && rNumber && rPassword && rConfirmPassword) {
+        if(rPassword === rConfirmPassword) {
+            $.ajax(
+                {
+                    type : "GET",
+                    url  : "/processRegistration/" + rName,
+                    data : {
+                        "rEmail"    : rEmail,
+                        "rPassword" : rPassword,
+                        "rProvider" : rProvider,
+                        "rNumber"   : rNumber
+                    },
+                    success : function (result) {
+                        if(result === 'error') {
+                            $('#rSubmit').prop("disabled", false);
+                            alert("Error occurred, Try again later.");
+                        } else {
+                            alert("Validation code sent to provided number");
+                            window.location.replace("/verificationCode");
+                        }
+                    },
+                    error: function (jgHXR, exception) {
+                        $('#rSubmit').prop("disabled", false);
+                        alert("Failed to process data, error occurred");
                     }
-                },
-                error: function (jgHXR, exception) {
-                    $('#rSubmit').prop("disabled", true);
-                    alert("Failed to process data, error occurred");
-                }
-        });
+                });
+        } else {
+            $('#rSubmit').prop("disabled", false);
+            alert("Password fields do not match, Try again!");
+        }
     } else {
-        $('#rSubmit').prop("disabled", true);
+        $('#rSubmit').prop("disabled", false);
         alert("All input fields are required");
     }
 }

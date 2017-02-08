@@ -207,6 +207,7 @@ public class WebController {
     @RequestMapping(value = "/processRegistration/{rName}", method = RequestMethod.GET)
     String register(@PathVariable("rName") String rName,
                     @RequestParam("rEmail") String rEmail,
+                    @RequestParam("rPassword") String rPassword,
                     @RequestParam("rProvider") String rProvider,
                     @RequestParam("rNumber") String rNumber) {
 
