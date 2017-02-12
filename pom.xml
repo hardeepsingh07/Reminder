@@ -46,6 +46,18 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
+
+        <!-- These are the dependency for the sql From spring -->
+        <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 		
 		<dependency>
    			 <groupId>org.springframework.boot</groupId>
@@ -60,10 +72,10 @@
 		</dependency>
 
         <dependency>
-    <groupId>org.apache.commons</groupId>
-    <artifactId>commons-math3</artifactId>
-    <version>3.2</version>
-</dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+             <version>3.2</version>
+        </dependency>
 
 		<dependency>
             <groupId>org.springframework.boot</groupId>
@@ -123,34 +135,5 @@
 		    </plugin>
 		</plugins>
 	</build>
-
-<reporting>
-  <plugins>
-	<!-- Normally, we take off the dependency report, saves time. -->
-	<plugin>
-		<groupId>org.apache.maven.plugins</groupId>
-		<artifactId>maven-project-info-reports-plugin</artifactId>
-		<version>2.7</version>
-		<configuration>
-			<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
-		</configuration>
-	</plugin>
-
-	<plugin>
-		<groupId>org.codehaus.mojo</groupId>
-		<artifactId>cobertura-maven-plugin</artifactId>
-		<version>2.7</version>
-		<configuration>
-			<formats>
-				<format>html</format>
-				<format>xml</format>
-			</formats>
-		</configuration>
-	</plugin>
-
-   </plugins>
-</reporting>
-
-
 
 </project>

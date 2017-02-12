@@ -55,12 +55,12 @@ function checkCode() {
             url  : "/validateCode/" + vCode,
             data : {},
             success : function (result) {
-                if(result  === 'valid') {
+                if(result  === 'invalid') {
+                    alert("Verification code invalid, Try again!");
+                } else {
                     //Going back to login page once validated
                     window.location.replace("/login");
-                    alert("Account successfully validated");
-                } else {
-                    alert("Verification code invalid, Try again!");
+                    alert(result + " : Account successfully validated");
                 }
             },
             error : function (jgHXR, exception) {
