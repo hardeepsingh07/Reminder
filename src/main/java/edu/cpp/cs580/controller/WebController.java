@@ -17,8 +17,6 @@ import org.slf4j.Logger;
 import java.util.ArrayList;
 
 
-
-
 @RestController
 public class WebController {
 
@@ -30,14 +28,6 @@ public class WebController {
     EmailService service;
 
     private static final Logger Logger = LoggerFactory.getLogger(WebController.class);
-
-    @RequestMapping(value = "/databasetesting", method = RequestMethod.GET)
-    ArrayList<Users> databaseTesting() {
-        //ArrayList<Users> userss1 = (ArrayList<Users>) usersManager.findByName("Hardeep Singh");
-        ArrayList<Users> userss = (ArrayList<Users>) usersManager.findAll();
-        return userss;
-    }
-
 
     @RequestMapping(value = "/valid/{uName}", method = RequestMethod.GET)
     String validateInput(@PathVariable("uName") String uName) {
@@ -115,7 +105,7 @@ public class WebController {
     @RequestMapping(value = "/validateCode/{vCode}", method = RequestMethod.GET)
     String validateCode(@PathVariable("vCode") String vCode) {
         ArrayList<Users> usersList = (ArrayList<Users>) usersManager.findByVcode(vCode);
-        if(!usersList.isEmpty()) {
+        if (!usersList.isEmpty()) {
             Users users = usersList.get(0);
             users.setVerified(true);
             usersManager.save(users);
@@ -123,7 +113,7 @@ public class WebController {
         }
         return "invalid";
     }
-    
+
     @RequestMapping(value = "/log/{logString}", method = RequestMethod.GET)
     String logger(@PathVariable("logString") String logString) {
         Logger.debug(logString);

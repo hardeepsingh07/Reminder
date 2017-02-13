@@ -11,8 +11,11 @@ import java.util.List;
 public interface UsersManager extends CrudRepository<Users, Integer> {
 
     List<Users> findByName(String name);
+
     List<Users> findByEmail(String email);
+
     List<Users> findByNumber(String number);
+
     List<Users> findByVcode(String vcode);
 
 }

@@ -9,13 +9,12 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 
-
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
 public class App {
 
-	private static final Logger logger = LoggerFactory.getLogger(App.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(App.class.getName());
 
     public static void main(String[] args) throws Exception {
         // Run Spring Boot
