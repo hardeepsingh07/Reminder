@@ -23,6 +23,10 @@ public class AppTest  {
     @Autowired
     UsersManager usersManager;
 
+
+    @Autowired
+    EmailService service;
+
     @Before
     public void setUp() throws Exception {
         Users users = new Users();
@@ -50,10 +54,7 @@ public class AppTest  {
         Users retrieved = (usersManager.findByVcode("3456")).get(0);
         usersManager.delete(retrieved.getId());
     }
-    
-    
-    @Autowired
-    EmailService service;   
+
     
     @Test
     public void testgetSMSAddress(){
