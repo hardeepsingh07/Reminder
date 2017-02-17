@@ -5,12 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
  * Created by hardeepsingh on 2/8/17.
  */
 @Entity
-public class Users {
+public class Users implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,11 +24,23 @@ public class Users {
     private String number;
     private String vcode;
     private boolean verified;
+    private String bills;
 
     public Users() {}
 
+    public Users(Users users) {
+        this.name = users.name;
+        this.email = users.email;
+        this.password = users.password;
+        this.serviceprovider = users.serviceprovider;
+        this.number = users.number;
+        this.vcode = users.vcode;
+        this.verified = users.verified;
+        this.bills = users.bills;
+    }
+
     public Users(String name, String email, String password, String serviceprovider, String number, String vcode,
-                 boolean verified) {
+                 boolean verified, String bills) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -35,6 +48,7 @@ public class Users {
         this.number = number;
         this.vcode = vcode;
         this.verified = verified;
+        this.bills = bills;
     }
 
     public Integer getId() {
@@ -99,5 +113,13 @@ public class Users {
 
     public void setVerified(boolean verified) {
         this.verified = verified;
+    }
+
+    public String getBills() {
+        return bills;
+    }
+
+    public void setBills(String bills) {
+        this.bills = bills;
     }
 }

@@ -5,6 +5,7 @@ function addBill() {
     var name = $('#billName').val();
     var amount = $('#billAmount').val();
     var duedate = $('#billDueDate').val();
+    alert(duedate);
 
     if (name && duedate) {
         $.ajax(
@@ -75,3 +76,8 @@ function paidBill(id) {
         }
     )
 }
+
+//Date Picker
+$( function() {
+    $( "#billDueDate" ).datepicker();
+} );

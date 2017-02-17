@@ -94,9 +94,10 @@ public class WebController {
             String code = service.registerUser(rName, rEmail, rProvider, rNumber);
 
             //save to the database make a new entry
-            Users users = new Users(rName, rEmail, rPassword, rProvider, rNumber, code, false);
+            Users users = new Users(rName, rEmail, rPassword, rProvider, rNumber, code, false, "0:");
             usersManager.save(users);
         } catch (Exception e) {
+            System.out.println(e.toString());
             return "error";
         }
         return "success";
@@ -129,12 +130,14 @@ public class WebController {
                     @RequestParam("duedate") String duedate) {
 
         try {
-            DateFormat format = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss", Locale.ENGLISH);
-            Date date = format.parse(duedate);
+            Date initDate = new SimpleDateFormat("dd/MM/yyyy").parse(duedate);
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            Date parsedDate = formatter.parse(formatter.format(initDate));
 
-            Bill bill = new Bill(name, amount, date, false);
+            Bill bill = new Bill(name, amount, parsedDate, false);
             billManager.save(bill);
         } catch (Exception e) {
+            System.out.println(e.toString());
             return "error";
         }
         return "success";

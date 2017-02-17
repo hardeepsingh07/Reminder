@@ -1,21 +1,25 @@
 package edu.cpp.cs580;
 
 import edu.cpp.cs580.manager.UsersManager;
+import edu.cpp.cs580.security.CustomUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.ArrayList;
 
 @Configuration
 @EnableWebMvcSecurity
+@ComponentScan(basePackageClasses = CustomUserService.class)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    @Autowired
-//    UsersManager usersManager;
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -30,11 +34,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //This is the login page i think we need to change the way to do login,
                 .formLogin()
                 .loginPage("/login")
-//                .defaultSuccessUrl("/success")
+                .defaultSuccessUrl("/success")
                 .permitAll()
                 .and()
                 .logout()
-//                .logoutSuccessUrl("/logOutSuccess")
                 .permitAll();
 
         //Needed to make some database calls
@@ -43,13 +46,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
-                .withUser("user@cpp.edu").password("password").roles("USER");
+//        auth
+//                .inMemoryAuthentication()
+//                .withUser("user@cpp.edu").password("password").roles("USER");
+          auth.userDetailsService(userDetailsService);
 
-//        auth.inMemoryAuthentication()
-//                .withUser(usersManager.findByEmail("?").get(0).getEmail())
-//                .password(usersManager.findByEmail("?").get(0).getPassword())
-//                .roles("USER");
     }
 }
