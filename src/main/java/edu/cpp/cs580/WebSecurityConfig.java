@@ -14,6 +14,8 @@ import java.util.ArrayList;
 @EnableWebMvcSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+//    @Autowired
+//    UsersManager usersManager;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -44,5 +46,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth
                 .inMemoryAuthentication()
                 .withUser("user@cpp.edu").password("password").roles("USER");
+
+//        auth.inMemoryAuthentication()
+//                .withUser(usersManager.findByEmail("?").get(0).getEmail())
+//                .password(usersManager.findByEmail("?").get(0).getPassword())
+//                .roles("USER");
     }
 }
