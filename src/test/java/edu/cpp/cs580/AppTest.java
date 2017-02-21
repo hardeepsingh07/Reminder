@@ -38,7 +38,6 @@ public class AppTest  {
         users.setVcode("3456");
         users.setVerified(false);
         users.setBills("ran");
-
         usersManager.save(users);
     }
 

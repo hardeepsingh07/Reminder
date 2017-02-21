@@ -11,6 +11,8 @@ function handleRegistration() {
     var rProvider = $('#rProvider').val();
     var rNumber = $('#rNumber').val();
 
+    alert(rName + rEmail + rPassword + rConfirmPassword + rProvider + rNumber);
+
     if(rName && rEmail && rProvider && rNumber && rPassword && rConfirmPassword) {
         if(rPassword === rConfirmPassword) {
             $.ajax(
@@ -71,3 +73,10 @@ function checkCode() {
         alert("Please enter the code");
     }
 }
+
+//Flipper for animation on logIn page
+$(function () {
+    $(".fliper-btn").click(function () {
+        $('.flip').find('.card').toggleClass('flipped')
+    });
+});

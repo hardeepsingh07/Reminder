@@ -205,6 +205,13 @@ public class WebController {
         ModelAndView modelAndView = new ModelAndView("forgotPassword");
         return modelAndView;
     }
+
+    @RequestMapping(value = "/home")
+    ModelAndView testhome() {
+        ModelAndView modelAndView = new ModelAndView("home");
+        return modelAndView;
+    }
+
 }
 
 	 

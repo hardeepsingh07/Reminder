@@ -1,0 +1,146 @@
+body {
+    padding-top: 100px;
+    font-family: "Georgia"
+}
+
+form {
+    padding: 20px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 15px 0 rgba(0, 0, 0, 0.12) !important;
+}
+
+h4 {
+    text-align: center;
+}
+
+.btn {
+    border-radius: 0px;
+}
+
+.form-control {
+    border-radius: 0px;
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/*.blue{*/
+/*color: #003366;*/
+/*}*/
+/*.fa{*/
+/*color: #003366;*/
+/*}*/
+
+/*.fa-facebook-f{*/
+/*padding: 10px 12px 10px 12px;*/
+/*border: 1px solid #337ab7;*/
+/*border-radius: 50%;*/
+/*}*/
+/*.fa-google-plus{*/
+/*padding: 10px 8px 10px 8px;*/
+/*border: 1px solid #337ab7;*/
+/*border-radius: 50%;*/
+/*}*/
+/*.fa-twitter{*/
+/*padding: 10px 8px 10px 8px;*/
+/*border: 1px solid #337ab7;*/
+/*border-radius: 50%;*/
+/*}*/
+
+i {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.flip {
+    -webkit-perspective: 800;
+    perspective: 800;
+    position: relative;
+}
+
+.flip .card.flipped {
+    -webkit-transform: rotatey(-180deg);
+    transform: rotatey(-180deg);
+}
+
+.flip .card {
+    height: 100%;
+    -webkit-transform-style: preserve-3d;
+    -webkit-transition: 1s;
+    transform-style: preserve-3d;
+    transition: 1s;
+}
+
+.flip .card .face {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    z-index: 2;
+}
+
+.flip .card .front {
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+}
+
+.flip .card .back {
+    position: absolute;
+    width: 100%;
+    -webkit-transform: rotatey(-180deg);
+    transform: rotatey(-180deg);
+}
+
+.inner {
+    margin: 0px !important;
+}
+
+input, button, select {
+    font-family: Georgia;
+}
+
+.container {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}​
+
+
+.btn-xl {
+    padding: 10px 16px;
+    font-size: 15px;
+    line-height: 1.0;
+}
+
+.btn {
+    transition: all 0.5s;
+    -o-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    border-radius: 0px;
+}
+
+.btn-rounded {
+    border-radius: 50px
+}
+
+.btn-round-tosquare:hover {
+    border-radius: 0px
+}
+
+.btn-square-toround:hover {
+    border-radius: 50px
+}
+
+.btn-bordered-primary {
+    color: #428BCA;
+    border: 1px solid #428BCA
+}
+
+.btn-bordered-primary:hover {
+    background: #428BCA;
+}

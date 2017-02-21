@@ -60,8 +60,7 @@ function paidBill(id) {
         {
             type: "POST",
             url: "/bill/" + id,
-            data: {
-            },
+            data: {},
             success: function (result) {
                 if (result === "error") {
                     alert("Error occurred while updating, Try again!");
@@ -78,6 +77,6 @@ function paidBill(id) {
 }
 
 //Date Picker
-$( function() {
-    $( "#billDueDate" ).datepicker();
-} );
+$(function () {
+    $("#billDueDate").datepicker();
+});

@@ -1,6 +1,5 @@
 package edu.cpp.cs580;
 
-import edu.cpp.cs580.manager.UsersManager;
 import edu.cpp.cs580.security.CustomUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,8 +9,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
-
-import java.util.ArrayList;
 
 @Configuration
 @EnableWebMvcSecurity
@@ -26,9 +23,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 //This will list what links are not going to be authenticate so we will have to put in the registration page which i used as sample
-                .antMatchers("/bill/**", "/verificationCode", "/validateCode/**",
+                .antMatchers("/bill/**", "/verificationCode", "/validateCode/**", "/home",
                         "/sendsms", "/registration", "/processRegistration/**",
-                        "/css/**", "/fonts/**", "/img/**", "/js/**").permitAll()
+                        "/css/**", "/image/**", "/js/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 //This is the login page i think we need to change the way to do login,
