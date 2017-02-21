@@ -10,9 +10,7 @@ function handleRegistration() {
     var rConfirmPassword = $('#rConfirmPassword').val();
     var rProvider = $('#rProvider').val();
     var rNumber = $('#rNumber').val();
-
-    alert(rName + rEmail + rPassword + rConfirmPassword + rProvider + rNumber);
-
+    
     if(rName && rEmail && rProvider && rNumber && rPassword && rConfirmPassword) {
         if(rPassword === rConfirmPassword) {
             $.ajax(

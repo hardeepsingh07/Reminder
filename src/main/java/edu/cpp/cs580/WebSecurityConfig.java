@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 //This is the login page i think we need to change the way to do login,
                 .formLogin()
-                .loginPage("/login")
+                .loginPage("/home")
                 .defaultSuccessUrl("/success")
                 .permitAll()
                 .and()

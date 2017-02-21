@@ -27,29 +27,6 @@ p {
     text-align: center;
 }
 
-/*.blue{*/
-/*color: #003366;*/
-/*}*/
-/*.fa{*/
-/*color: #003366;*/
-/*}*/
-
-/*.fa-facebook-f{*/
-/*padding: 10px 12px 10px 12px;*/
-/*border: 1px solid #337ab7;*/
-/*border-radius: 50%;*/
-/*}*/
-/*.fa-google-plus{*/
-/*padding: 10px 8px 10px 8px;*/
-/*border: 1px solid #337ab7;*/
-/*border-radius: 50%;*/
-/*}*/
-/*.fa-twitter{*/
-/*padding: 10px 8px 10px 8px;*/
-/*border: 1px solid #337ab7;*/
-/*border-radius: 50%;*/
-/*}*/
-
 i {
     margin-left: 5px;
     margin-right: 5px;
@@ -143,4 +120,5 @@ input, button, select {
 
 .btn-bordered-primary:hover {
     background: #428BCA;
+    color: white;
 }

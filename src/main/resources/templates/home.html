@@ -34,14 +34,7 @@
                 <div class="card">
                     <div class="face front">
                         <div class="panel panel-default">
-                            <!--Kevin Fix this-->
-                            <div th:if="${param.error}">
-                                Invalid username and password.
-                            </div>
-                            <div th:if="${param.logout}">
-                                You have been logged out.
-                            </div>
-                            <form th:action="@{/login}" method="post">
+                            <form th:action="@{/home}" method="post">
                                 <br/>
                                 <h1 class="text-center">Reminder!</h1>
                                 <br/>
@@ -53,8 +46,11 @@
                                     <input type="password" class="form-control" id="password"
                                            name="password" placeholder="Password"/>
                                 </div>
-                                <a class="form-control btn btn-square-toround btn-xl
-                                        btn-bordered-primary">LOG IN</a>
+                                <input type="submit" class="form-control btn btn-square-toround btn-xl
+                                        btn-bordered-primary"/>
+                                <hr />
+                                <p th:if="${param.error}" align="center"> Invalid username and password. Try again!</p>
+                                <p th:if="${param.logout}"> You have been logged out.</p>
                                 <hr/>
                                 <p class="text-center">
                                     <a href="#" class="fliper-btn">Create new account?</a>
@@ -83,8 +79,8 @@
                                     <option>TMobile</option>
                                     <option>Virgin Mobile</option>
                                 </select>
-                                <a class="form-control btn btn-square-toround btn-xl btn-bordered-primary"
-                                   onclick="handleRegistration()">SIGN UP</a>
+                                <button class="form-control btn btn-square-toround btn-xl btn-bordered-primary"
+                                   onclick="handleRegistration()">SIGN UP</button>
                                 <p class="text-center">
                                     <a href="#" class="fliper-btn">Already have an account?</a>
                                 </p>
