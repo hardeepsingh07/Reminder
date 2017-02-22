@@ -22,13 +22,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                //This will list what links are not going to be authenticate so we will have to put in the registration page which i used as sample
                 .antMatchers("/bill/**", "/verificationCode", "/validateCode/**", "/home",
                         "/sendsms", "/registration", "/processRegistration/**",
-                        "/css/**", "/image/**", "/js/**").permitAll()
+                        "/css/**", "/image/**", "/js/**", "/verification").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                //This is the login page i think we need to change the way to do login,
                 .formLogin()
                 .loginPage("/home")
                 .defaultSuccessUrl("/success")
@@ -43,10 +41,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth
-//                .inMemoryAuthentication()
-//                .withUser("user@cpp.edu").password("password").roles("USER");
           auth.userDetailsService(userDetailsService);
-
     }
 }

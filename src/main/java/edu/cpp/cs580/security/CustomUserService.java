@@ -21,7 +21,6 @@ public class CustomUserService implements UserDetailsService {
         this.usersManager = usersManager;
     }
 
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Users user = usersManager.findByEmail(username).get(0);

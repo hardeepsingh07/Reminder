@@ -212,6 +212,12 @@ public class WebController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/verification")
+    ModelAndView testVerification() {
+        ModelAndView modelAndView = new ModelAndView("verification");
+        return modelAndView;
+    }
+
 }
 
 	 

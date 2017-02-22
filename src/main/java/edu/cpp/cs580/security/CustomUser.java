@@ -55,4 +55,9 @@ public class CustomUser  extends Users implements UserDetails {
     public String getPassword() {
         return super.getPassword();
     }
+
+    @Override
+    public boolean isVerified() {
+        return super.isVerified();
+    }
 }

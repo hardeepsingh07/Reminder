@@ -29,7 +29,7 @@ function handleRegistration() {
                             alert("Error occurred, Try again later.");
                         } else {
                             alert("Validation code sent to provided number");
-                            window.location.replace("/verificationCode");
+                            window.location.replace("/verification");
                         }
                     },
                     error: function (jgHXR, exception) {
@@ -59,7 +59,7 @@ function checkCode() {
                     alert("Verification code invalid, Try again!");
                 } else {
                     //Going back to login page once validated
-                    window.location.replace("/login");
+                    window.location.replace("/home");
                     alert(result + " : Account successfully validated");
                 }
             },
