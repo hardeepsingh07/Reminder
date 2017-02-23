@@ -66,6 +66,8 @@ public class WebController {
         ArrayList<Users> usersList = (ArrayList<Users>) usersManager.findByVcode(vCode);
         if (!usersList.isEmpty()) {
             Users users = usersList.get(0);
+            //Reset Verification Code once verified to --> 000000
+            users.setVcode("000000");
             users.setVerified(true);
             usersManager.save(users);
             return users.getName() + " (" + users.getEmail() + ")";

@@ -49,7 +49,6 @@ function handleRegistration() {
 
 function checkCode() {
     var vCode = $('#verificationCode').val();
-    alert(vCode);
     if(vCode) {
         $.ajax( {
             type : "GET",
