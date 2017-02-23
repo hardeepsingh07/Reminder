@@ -2,7 +2,7 @@
  * Created by hardeepsingh on 2/7/17.
  */
 function handleRegistration() {
-    $('#rSubmit').prop("disabled", true);
+    $('#rButton').prop("disabled", true);
 
     var rName = $('#rName').val();
     var rEmail = $('#rEmail').val();
@@ -25,7 +25,7 @@ function handleRegistration() {
                     },
                     success : function (result) {
                         if(result === 'error') {
-                            $('#rSubmit').prop("disabled", false);
+                            $('#rButton').prop("disabled", false);
                             alert("Error occurred, Try again later.");
                         } else {
                             alert("Validation code sent to provided number");
@@ -33,22 +33,23 @@ function handleRegistration() {
                         }
                     },
                     error: function (jgHXR, exception) {
-                        $('#rSubmit').prop("disabled", false);
+                        $('#rButton').prop("disabled", false);
                         alert("Failed to process data, error occurred");
                     }
                 });
         } else {
-            $('#rSubmit').prop("disabled", false);
+            $('#rButton').prop("disabled", false);
             alert("Password fields do not match, Try again!");
         }
     } else {
-        $('#rSubmit').prop("disabled", false);
+        $('#rButton').prop("disabled", false);
         alert("All input fields are required");
     }
 }
 
 function checkCode() {
-    var vCode = $('#vCode').val();
+    var vCode = $('#verificationCode').val();
+    alert(vCode);
     if(vCode) {
         $.ajax( {
             type : "GET",

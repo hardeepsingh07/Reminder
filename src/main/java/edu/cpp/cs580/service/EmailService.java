@@ -37,8 +37,8 @@ public class EmailService {
         String dAddresss = getSMSAddress(provider, number);
 
         Random r = new Random();
-        int low = 5000;
-        int high = 10000;
+        int low = 100000;
+        int high = 999999;
         int result = r.nextInt(high - low) + low;
 
         //send email via SMS

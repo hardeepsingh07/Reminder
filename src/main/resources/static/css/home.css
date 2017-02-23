@@ -122,3 +122,7 @@ input, button, select {
     background: #428BCA;
     color: white;
 }
+
+#verificationCode {
+    text-align: center;
+}

@@ -39,50 +39,7 @@ public class WebController {
 
     private static final Logger Logger = LoggerFactory.getLogger(WebController.class);
 
-    @RequestMapping(value = "/valid/{uName}", method = RequestMethod.GET)
-    String validateInput(@PathVariable("uName") String uName) {
-        if (uName.contains("@")) {
-            return "Valid";
-        } else {
-            return "Invalid";
-        }
-    }
-
-    @RequestMapping(value = "/encrypt/{password}", method = RequestMethod.GET)
-    String encrypt(@PathVariable("password") String password) {
-        StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
-        String encryptedPassword = passwordEncryptor.encryptPassword(password);
-        return encryptedPassword;
-    }
-
-    @RequestMapping(value = "/sendsms")
-    ModelAndView loadSendEmail() {
-        ModelAndView modelAndView = new ModelAndView("sms");
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/processSMS/{number}", method = RequestMethod.GET)
-    String sendEmail(@PathVariable("number") String number,
-                     @RequestParam("provider") String provider,
-                     @RequestParam("subject") String subject,
-                     @RequestParam("message") String message) {
-
-        //Use service class to send email
-        try {
-            service.sendSMS(number, provider, subject, message);
-        } catch (Exception e) {
-            return "error";
-        }
-        return "success";
-    }
-
-    //Registration
-    @RequestMapping(value = "/registration")
-    ModelAndView loadRegistration() {
-        ModelAndView modelAndView = new ModelAndView("registration");
-        return modelAndView;
-    }
-
+    //process registration
     @RequestMapping(value = "/processRegistration/{rName}", method = RequestMethod.GET)
     String register(@PathVariable("rName") String rName,
                     @RequestParam("rEmail") String rEmail,
@@ -101,13 +58,6 @@ public class WebController {
             return "error";
         }
         return "success";
-    }
-
-    //load validation
-    @RequestMapping(value = "/verificationCode")
-    ModelAndView verificationCode() {
-        ModelAndView modelAndView = new ModelAndView("verificationCode");
-        return modelAndView;
     }
 
     //Verify Code
@@ -181,11 +131,21 @@ public class WebController {
         return "Successfully Logged " + logString;
     }
 
-    @RequestMapping(value = "/login")
-    ModelAndView logIn() {
-        ModelAndView modelAndView = new ModelAndView("login");
+
+    //Load Model and Views
+    @RequestMapping(value = "/home")
+    ModelAndView home() {
+        ModelAndView modelAndView = new ModelAndView("home");
         return modelAndView;
     }
+
+    @RequestMapping(value = "/verification")
+    ModelAndView verification() {
+        ModelAndView modelAndView = new ModelAndView("verification");
+        return modelAndView;
+    }
+
+//    ---------Can't get rid of these till new pages are added------
 
     @RequestMapping(value = "/success")
     ModelAndView success() {
@@ -206,19 +166,55 @@ public class WebController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/home")
-    ModelAndView testhome() {
-        ModelAndView modelAndView = new ModelAndView("home");
+    @RequestMapping(value = "/login")
+    ModelAndView logIn() {
+        ModelAndView modelAndView = new ModelAndView("login");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/verification")
-    ModelAndView testVerification() {
-        ModelAndView modelAndView = new ModelAndView("verification");
+    //Registration
+    @RequestMapping(value = "/registration")
+    ModelAndView loadRegistration() {
+        ModelAndView modelAndView = new ModelAndView("registration");
         return modelAndView;
     }
-
 }
 
-	 
-	
+
+
+//    @RequestMapping(value = "/sendsms")
+//    ModelAndView loadSendEmail() {
+//        ModelAndView modelAndView = new ModelAndView("sms");
+//        return modelAndView;
+//    }
+//
+//    @RequestMapping(value = "/processSMS/{number}", method = RequestMethod.GET)
+//    String sendEmail(@PathVariable("number") String number,
+//                     @RequestParam("provider") String provider,
+//                     @RequestParam("subject") String subject,
+//                     @RequestParam("message") String message) {
+//
+//        //Use service class to send email
+//        try {
+//            service.sendSMS(number, provider, subject, message);
+//        } catch (Exception e) {
+//            return "error";
+//        }
+//        return "success";
+//    }
+//
+//    @RequestMapping(value = "/valid/{uName}", method = RequestMethod.GET)
+//    String validateInput(@PathVariable("uName") String uName) {
+//        if (uName.contains("@")) {
+//            return "Valid";
+//        } else {
+//            return "Invalid";
+//        }
+//    }
+//
+//    @RequestMapping(value = "/encrypt/{password}", method = RequestMethod.GET)
+//    String encrypt(@PathVariable("password") String password) {
+//        StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
+//        String encryptedPassword = passwordEncryptor.encryptPassword(password);
+//        return encryptedPassword;
+//    }
