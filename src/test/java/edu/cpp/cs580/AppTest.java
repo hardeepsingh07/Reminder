@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/*
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = App.class)
 public class AppTest  {
@@ -37,7 +37,11 @@ public class AppTest  {
         users.setNumber("909");
         users.setVcode("3456");
         users.setVerified(false);
+<<<<<<< HEAD
         users.setBills("ran");
+=======
+
+>>>>>>> parent of 15ba707... Tests working
         usersManager.save(users);
     }
 
@@ -68,4 +72,4 @@ public class AppTest  {
     
     
 }
-
+ */
