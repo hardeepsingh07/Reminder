@@ -9,7 +9,6 @@ import static org.junit.Assert.assertEquals;
 public class WebControllerTest {
 
    
-<<<<<<< HEAD
 //    @Test
 //    public void test() throws Exception {
 //    	WebController controller = new WebController();
@@ -17,7 +16,7 @@ public class WebControllerTest {
 //        String temp =controller.validateInput(uName);
 //        assertEquals("Invalid", temp);
 //    }
-=======
+
 /*
     @Test
     public void test() throws Exception {
@@ -27,5 +26,5 @@ public class WebControllerTest {
         assertEquals("Invalid", temp);
     }
 */
->>>>>>> parent of 15ba707... Tests working
+
 }

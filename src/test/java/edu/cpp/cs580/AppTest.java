@@ -37,11 +37,7 @@ public class AppTest  {
         users.setNumber("909");
         users.setVcode("3456");
         users.setVerified(false);
-<<<<<<< HEAD
         users.setBills("ran");
-=======
-
->>>>>>> parent of 15ba707... Tests working
         usersManager.save(users);
     }
 
