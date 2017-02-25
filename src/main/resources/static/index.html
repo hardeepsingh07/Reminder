@@ -1,11 +1,18 @@
-<html><!-- This page will be shown when you git the root URL -->
+<html>
 <head>
-	<title>CS580 Demo HomePage</title>
-	<script src="//code.jquery.com/jquery-1.11.0.min.js">
-	</script><script src="/js/home-control.js"></script>
+	<title>Success</title>
 </head>
-<body onload="healthCheck();">
-<p>Demo Project is running:</p>
-<label id="status"></label>
+<body>
+<p>GOOD GG</p>
+<div class="form-group last">
+			<div class="col-sm-offset-3 col-sm-9">
+				<button type="button" id="logOutSuccess">Log Off</button>
+				<script type="text/javascript">
+    									document.getElementById("logout").onclick = function () {
+       										 location.href = "/logout";
+   										 };
+									</script>
+			</div>
+		</div>
 </body>
 </html>

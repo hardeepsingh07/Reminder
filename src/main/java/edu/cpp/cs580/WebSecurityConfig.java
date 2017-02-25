@@ -27,12 +27,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/home")
-                .defaultSuccessUrl("/success")
-                .permitAll()
+                .loginPage("/home") 
+                	.permitAll()
+                	.defaultSuccessUrl("/success")
                 .and()
                 .logout()
-                .permitAll();
+                	.permitAll();
 
         //Needed to make some database calls
         http.csrf().disable();
