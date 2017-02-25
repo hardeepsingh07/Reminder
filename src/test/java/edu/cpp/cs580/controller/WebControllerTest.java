@@ -16,15 +16,4 @@ public class WebControllerTest {
 //        String temp =controller.validateInput(uName);
 //        assertEquals("Invalid", temp);
 //    }
-
-/*
-    @Test
-    public void test() throws Exception {
-    	WebController controller = new WebController();
-        String uName ="kevin";
-        String temp =controller.validateInput(uName);
-        assertEquals("Invalid", temp);
-    }
-*/
-
 }
