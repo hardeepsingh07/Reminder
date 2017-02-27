@@ -2,7 +2,8 @@
  * Created by hardeepsingh on 2/7/17.
  */
 function handleRegistration() {
-    $('#rButton').prop("disabled", true);
+    //$('#rButton').prop("disabled", true);
+    $('#rButton').button('loading');
 
     var rName = $('#rName').val();
     var rEmail = $('#rEmail').val();
@@ -25,7 +26,7 @@ function handleRegistration() {
                     },
                     success : function (result) {
                         if(result === 'error') {
-                            $('#rButton').prop("disabled", false);
+                            $('#rButton').button('reset');
                             alert("Error occurred, Try again later.");
                         } else {
                             alert("Validation code sent to provided number");
@@ -33,16 +34,16 @@ function handleRegistration() {
                         }
                     },
                     error: function (jgHXR, exception) {
-                        $('#rButton').prop("disabled", false);
+                        $('#rButton').button('reset');
                         alert("Failed to process data, error occurred");
                     }
                 });
         } else {
-            $('#rButton').prop("disabled", false);
+            $('#rButton').button('reset');
             alert("Password fields do not match, Try again!");
         }
     } else {
-        $('#rButton').prop("disabled", false);
+        $('#rButton').button('reset');
         alert("All input fields are required");
     }
 }

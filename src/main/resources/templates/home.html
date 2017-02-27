@@ -22,73 +22,29 @@
 </head>
 
 <body background="/image/background.jpg">
+<div id="fullscreen_bg" class="fullscreen_bg"/>
+
 <div class="container">
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-            <div class="flip">
-                <div class="card">
-                    <div class="face front">
-                        <div class="panel panel-default">
-                            <form th:action="@{/home}" method="post">
-                                <br/>
-                                <h1 class="text-center">Reminder!</h1>
-                                <br/>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="username"
-                                           name="username" placeholder="Email"/>
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control" id="password"
-                                           name="password" placeholder="Password"/>
-                                </div>
-                                <input type="submit" class="form-control btn btn-square-toround btn-xl
-                                        btn-bordered-primary"/>
-                                <hr />
-                                <p th:if="${param.error}" align="center"> Invalid username and password. Try again!</p>
-                                <p th:if="${param.logout}"> You have been logged out.</p>
-                                <p th:if="${param.success}"> You have been logged out.</p>
-                                <hr/>
-                                <p class="text-center">
-                                    <a href="#" class="fliper-btn">Create new account?</a>
-                                </p>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="face back">
-                        <div class="panel panel-default">
-                            <form class="form-horizontal">
-                                <br/>
-                                <h1 class="text-center">Reminder!</h1>
-                                <br/>
-                                <label>Basic Information</label>
-                                <input class="form-control" type="text" id="rName" placeholder="Full Name"/>
-                                <input class="form-control" type="email" id="rEmail" placeholder="Email"/>
-                                <label>Private Information</label>
-                                <input class="form-control" type="password" id="rPassword" placeholder="Password"/>
-                                <input class="form-control" type="password" id="rConfirmPassword" placeholder="Confirm Password"/>
-                                <input class="form-control" type="number" id="rNumber" placeholder="Mobile Number"/>
-                                <label for="rProvider">Service Provider (select one):</label>
-                                <select class="form-control" id="rProvider">
-                                    <option>Verizon</option>
-                                    <option>Sprint</option>
-                                    <option>ATT</option>
-                                    <option>TMobile</option>
-                                    <option>Virgin Mobile</option>
-                                </select>
-                                <button id="rButton" class="form-control btn btn-square-toround btn-xl btn-bordered-primary"
-                                   onclick="handleRegistration()">SIGN UP</button>
-                                <p class="text-center">
-                                    <a href="#" class="fliper-btn">Already have an account?</a>
-                                </p>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <form th:action="@{/home}" method="post" class="form-signin">
+        <h1 class="form-signin-heading text-muted">Reminder</h1>
+        <div class="form-group">
+            <input type="text" class="form-control" id="username"
+                   name="username" placeholder="Email"/>
         </div>
-        <div class="col-md-4"></div>
-    </div>
+        <div class="form-group">
+            <input type="password" class="form-control" id="password"
+                   name="password" placeholder="Password"/>
+        </div>
+        <input type="submit" class="form-control btn btn-square-toround btn-xl
+                                        btn-bordered-primary"/>
+
+        <hr/>
+        <p th:if="${param.error}" align="center"> Invalid username and password. Try again!</p>
+        <p th:if="${param.logout}" align="center"> You have been logged out. <br/> Good Bye!</p>
+        <!--<p th:if="${param.success}" align="center"> You have been logged out.</p>-->
+        <hr/>
+
+    </form>
 
 </div>
 </body>
