@@ -3,7 +3,7 @@
  */
 function handleRegistration() {
     //$('#rButton').prop("disabled", true);
-    $('#rButton').button('loading');
+    $("#rButton").prop("disabled",true);
 
     var rName = $('#rName').val();
     var rEmail = $('#rEmail').val();
@@ -11,6 +11,8 @@ function handleRegistration() {
     var rConfirmPassword = $('#rConfirmPassword').val();
     var rProvider = $('#rProvider').val();
     var rNumber = $('#rNumber').val();
+
+    alert(rNumber + rName + rPassword + rProvider);
     
     if(rName && rEmail && rProvider && rNumber && rPassword && rConfirmPassword) {
         if(rPassword === rConfirmPassword) {
@@ -26,7 +28,7 @@ function handleRegistration() {
                     },
                     success : function (result) {
                         if(result === 'error') {
-                            $('#rButton').button('reset');
+                            $("#rButton").prop("disabled", false);
                             alert("Error occurred, Try again later.");
                         } else {
                             alert("Validation code sent to provided number");
@@ -34,16 +36,16 @@ function handleRegistration() {
                         }
                     },
                     error: function (jgHXR, exception) {
-                        $('#rButton').button('reset');
+                        $("#rButton").prop("disabled", false);
                         alert("Failed to process data, error occurred");
                     }
                 });
         } else {
-            $('#rButton').button('reset');
+            $("#rButton").prop("disabled", false);
             alert("Password fields do not match, Try again!");
         }
     } else {
-        $('#rButton').button('reset');
+        $("#rButton").prop("disabled", false);
         alert("All input fields are required");
     }
 }
@@ -72,10 +74,3 @@ function checkCode() {
         alert("Please enter the code");
     }
 }
-
-//Flipper for animation on logIn page
-// $(function () {
-//     $(".fliper-btn").click(function () {
-//         $('.flip').find('.card').toggleClass('flipped')
-//     });
-// });

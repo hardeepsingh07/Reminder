@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
@@ -11,82 +12,61 @@
     <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'/>
     <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'/>
 
+    <!-- First include jquery js -->
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+    <script src="/js/bootstrap.min.js/"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+
     <!--Custom Sheets/Scripts-->
     <link rel="stylesheet" href="/css/home.css"/>
-    <script type="text/javascript" src="/js/registration-control.js"></script>
 
-    <title>Admin</title>
+    <title>Reminder</title>
 </head>
-<body>
+<body background="/image/background.jpg">
 <div class="container">
-    <div class="row main">
+    <div class="main-login main-center">
         <div class="panel-heading">
             <div class="panel-title text-center">
-                <h1 class="title">Company Name</h1>
-                <hr />
+                <h1 class="title">Reminder</h1>
+                <hr/>
             </div>
         </div>
-        <div class="main-login main-center">
-            <form class="form-horizontal" method="post" action="#">
+        <form th:action="@{/home}" class="form-horizontal" method="post">
 
-                <div class="form-group">
-                    <label for="name" class="cols-sm-2 control-label">Your Name</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="name" id="name"  placeholder="Enter your Name"/>
-                        </div>
+            <div class="form-group">
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Email"/>
                     </div>
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <label for="email" class="cols-sm-2 control-label">Your Email</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
-                        </div>
+            <div class="form-group">
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Password"/>
                     </div>
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <label for="username" class="cols-sm-2 control-label">Username</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username"/>
-                        </div>
-                    </div>
-                </div>
+            <div class="form-group ">
+                <button type="submit" class="btn btn-primary btn-block login-button">Login</button>
+            </div>
 
-                <div class="form-group">
-                    <label for="password" class="cols-sm-2 control-label">Password</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                            <input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
-                        </div>
-                    </div>
-                </div>
+            <hr />
+            <p th:if="${param.error}" align="center"> Invalid username and password. Try again!</p>
+            <p th:if="${param.logout}" align="center"> You have been logged out. <br/> Have a good day!</p>
+            <hr />
 
-                <div class="form-group">
-                    <label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                            <input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"/>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group ">
-                    <button type="button" class="btn btn-primary btn-lg btn-block login-button">Register</button>
-                </div>
-                <div class="login-register">
-                    <a href="index.php">Login</a>
-                </div>
-            </form>
-        </div>
+            <div class="login-register">
+                <a href="/registration">Don't have an account, Register Here!</a>
+            </div>
+        </form>
     </div>
 </div>
 </body>

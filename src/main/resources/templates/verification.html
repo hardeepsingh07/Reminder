@@ -1,6 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
+
+    <!-- Website Font style -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"/>
+
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'/>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'/>
+
     <!-- First include jquery js -->
     <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
@@ -9,41 +19,37 @@
     <script src="/js/bootstrap.min.js/"></script>
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
 
-    <!--Font family for custom fonts-->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"/>
-
     <!--Custom Sheets/Scripts-->
     <link rel="stylesheet" href="/css/home.css"/>
-    <script type="text/javascript" src="/js/registration-control.js"></script>
+    <script src="/js/home-registration-control.js"></script>
 
-    <title>Verification</title>
+    <title>Reminder</title>
 </head>
 <body background="/image/background.jpg">
 <div class="container">
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-            <div class="flip">
-                <div class="card">
-                    <div class="face front">
-                        <div class="panel panel-default">
-                            <form>
-                                <br/>
-                                <h1 class="text-center">Reminder!</h1>
-                                <br/>
-                                <input id="verificationCode" class="form-control" maxlength="6" type="text"
-                                       placeholder="Verification Code"/>
-                                <button id="vSubmit" type="button"
-                                        class="form-control btn btn-square-toround btn-xl btn-bordered-primary"
-                                        onclick="checkCode()">Verify!
-                                </button>
-                            </form>
-                        </div>
+    <div class="main-login main-center">
+        <div class="panel-heading">
+            <div class="panel-title text-center">
+                <h1 class="title">Reminder</h1>
+                <hr/>
+            </div>
+        </div>
+        <form class="form-horizontal">
+
+            <div class="form-group">
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock fa" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control" id="verificationCode" name="verificationCode" placeholder="Verification Code"/>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4"></div>
+
+            <div class="form-group ">
+                <button type="button" class="btn btn-primary btn-block login-button" onclick="checkCode()">Verify!</button>
+            </div>
+
+        </form>
     </div>
 </div>
 </body>

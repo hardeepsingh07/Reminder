@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
+
+    <!-- Website Font style -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"/>
+
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'/>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'/>
+
+    <!-- First include jquery js -->
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+    <script src="/js/bootstrap.min.js/"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+
+    <!--Custom Sheets/Scripts-->
+    <link rel="stylesheet" href="/css/home.css"/>
+    <script src="/js/home-registration-control.js"></script>
+
+    <title>Reminder</title>
+</head>
+<body background="/image/background.jpg">
+<div class="container">
+    <div class="main-login main-center">
+        <div class="panel-heading">
+            <div class="panel-title text-center">
+                <h1 class="title">Reminder</h1>
+                <hr/>
+            </div>
+        </div>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control" name="name" id="rName" placeholder="Full Name"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control" name="email" id="rEmail"
+                               placeholder="Email"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                        <input type="password" class="form-control" name="password" id="rPassword"
+                               placeholder="Password"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                        <input type="password" class="form-control" name="confirm" id="rConfirmPassword"
+                               placeholder="Confirm Password"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control" name="phoneNumber" id="rNumber"
+                               placeholder="Mobile Number"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <select class="form-control" id="rProvider">
+                    <option>Verizon</option>
+                    <option>Sprint</option>
+                    <option>ATT</option>
+                    <option>TMobile</option>
+                    <option>Virgin Mobile</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <button id="rButton" class="btn btn-primary btn-block" onclick="handleRegistration()">Register
+                </button>
+            </div>
+
+            <div class="login-register">
+                <a href="/home">Already have an account? Login!</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

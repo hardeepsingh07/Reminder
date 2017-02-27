@@ -6,44 +6,49 @@
  * General styles
  */
 
-body, html{
+body, html {
     height: 100%;
     background-repeat: no-repeat;
     background-color: #d3d3d3;
-    font-family: 'Oxygen', sans-serif;
+    font-family: 'Georgia', sans-serif;
 }
 
-.main{
+.container {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.main {
     margin-top: 70px;
 }
 
 h1.title {
-    font-size: 50px;
-    font-family: 'Passion One', cursive;
+    font-size: 40px;
+    font-family: 'Georgia', cursive;
     font-weight: 400;
 }
 
-hr{
+hr {
     width: 10%;
     color: #fff;
 }
 
-.form-group{
-    margin-bottom: 15px;
-}
-
-label{
+.form-group {
     margin-bottom: 15px;
 }
 
 input,
 input::-webkit-input-placeholder {
-    font-size: 11px;
+    font-size: 13px;
     padding-top: 3px;
 }
 
-.main-login{
-    background-color: #fff;
+.main-login {
+    background-color: rgba(255, 255, 255, 0.4);
+
     /* shadows and rounded borders */
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
@@ -54,7 +59,7 @@ input::-webkit-input-placeholder {
 
 }
 
-.main-center{
+.main-center {
     margin-top: 30px;
     margin: 0 auto;
     max-width: 330px;
@@ -62,11 +67,11 @@ input::-webkit-input-placeholder {
 
 }
 
-.login-button{
+.login-button {
     margin-top: 5px;
 }
 
-.login-register{
-    font-size: 11px;
+.login-register {
+    font-size: 13px;
     text-align: center;
 }
