@@ -24,6 +24,10 @@ public class CustomUserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Users user = usersManager.findByEmail(username).get(0);
-        return new CustomUser(user);
+        if(user.isVerified()){
+        	 return new CustomUser(user);
+        }
+        else 
+        	return null;
     }
 }
