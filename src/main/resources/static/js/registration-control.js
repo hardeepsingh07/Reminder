@@ -74,8 +74,8 @@ function checkCode() {
 }
 
 //Flipper for animation on logIn page
-$(function () {
-    $(".fliper-btn").click(function () {
-        $('.flip').find('.card').toggleClass('flipped')
-    });
-});
+// $(function () {
+//     $(".fliper-btn").click(function () {
+//         $('.flip').find('.card').toggleClass('flipped')
+//     });
+// });
