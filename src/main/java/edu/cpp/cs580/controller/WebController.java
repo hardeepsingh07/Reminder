@@ -82,7 +82,7 @@ public class WebController {
                     @RequestParam("duedate") String duedate) {
 
         try {
-            Date initDate = new SimpleDateFormat("dd/MM/yyyy").parse(duedate);
+            Date initDate = new SimpleDateFormat("MM/dd/yyyy").parse(duedate);
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Date parsedDate = formatter.parse(formatter.format(initDate));
 
@@ -147,27 +147,6 @@ public class WebController {
         return modelAndView;
     }
 
-//    ---------Can't get rid of these till new pages are added------
-
-    @RequestMapping(value = "/success")
-    ModelAndView success() {
-        ModelAndView modelAndView = new ModelAndView("success");
-        return modelAndView;
-    }
-
-
-    @RequestMapping(value = "/logOutSuccess")
-    ModelAndView logOutSuccessMV() {
-        ModelAndView modelAndView = new ModelAndView("logOutSuccess");
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/forgotPassword")
-    ModelAndView forgotPasswordMV() {
-        ModelAndView modelAndView = new ModelAndView("forgotPassword");
-        return modelAndView;
-    }
-
     @RequestMapping(value = "/login")
     ModelAndView logIn() {
         ModelAndView modelAndView = new ModelAndView("login");
@@ -180,43 +159,12 @@ public class WebController {
         ModelAndView modelAndView = new ModelAndView("registration");
         return modelAndView;
     }
+
+    @RequestMapping(value = "/update")
+    ModelAndView update() {
+        ArrayList<Bill> bills = (ArrayList<Bill>) billManager.findAll();
+        ModelAndView modelAndView = new ModelAndView("update");
+        modelAndView.addObject("bills", bills);
+        return modelAndView;
+    }
 }
-
-
-
-//    @RequestMapping(value = "/sendsms")
-//    ModelAndView loadSendEmail() {
-//        ModelAndView modelAndView = new ModelAndView("sms");
-//        return modelAndView;
-//    }
-//
-//    @RequestMapping(value = "/processSMS/{number}", method = RequestMethod.GET)
-//    String sendEmail(@PathVariable("number") String number,
-//                     @RequestParam("provider") String provider,
-//                     @RequestParam("subject") String subject,
-//                     @RequestParam("message") String message) {
-//
-//        //Use service class to send email
-//        try {
-//            service.sendSMS(number, provider, subject, message);
-//        } catch (Exception e) {
-//            return "error";
-//        }
-//        return "success";
-//    }
-//
-//    @RequestMapping(value = "/valid/{uName}", method = RequestMethod.GET)
-//    String validateInput(@PathVariable("uName") String uName) {
-//        if (uName.contains("@")) {
-//            return "Valid";
-//        } else {
-//            return "Invalid";
-//        }
-//    }
-//
-//    @RequestMapping(value = "/encrypt/{password}", method = RequestMethod.GET)
-//    String encrypt(@PathVariable("password") String password) {
-//        StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
-//        String encryptedPassword = passwordEncryptor.encryptPassword(password);
-//        return encryptedPassword;
-//    }

@@ -1,72 +1,129 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html class="full" lang="en">
+<!-- Make sure the <html> tag is set to the .full CSS class. Change the background image in the full.css file. -->
+
 <head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
-
-    <!-- Website Font style -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"/>
-
-    <!-- Google Fonts -->
-    <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'/>
-    <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'/>
-
-    <!-- First include jquery js -->
-    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-
-    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
-    <script src="/js/bootstrap.min.js/"></script>
-    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
-
-    <!--Custom Sheets/Scripts-->
-    <link rel="stylesheet" href="/css/home.css"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
 
     <title>Reminder</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link href="/css/home.css" rel="stylesheet"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
 </head>
-<body background="/image/background.jpg">
-<div class="container">
-    <div class="main-login main-center">
-        <div class="panel-heading">
-            <div class="panel-title text-center">
-                <h1 class="title">Reminder</h1>
-                <hr/>
-            </div>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/login" id="login">Log In</a>
+
         </div>
-        <form th:action="@{/home}" class="form-horizontal" method="post">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a data-toggle="collapse" data-target="#about">About</a>
+                </li>
+                <li>
+                    <a data-toggle="collapse" data-parent="#accordion" data-target="#contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-            <div class="form-group">
-                <div class="cols-sm-10">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Email"/>
-                    </div>
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <h1>Reminder</h1>
+            <p>Never miss a due date again!
+                <br/> A text reminder service to make sure you never pay late fees on your bills</p>
+        </div>
+    </div>
+</div>
+
+<!--Load About Info-->
+<div class="sidepanels absolute">
+    <div class="panel-collapse collapse" id="about">
+        <div class="main-login main-center">
+            <div class="panel-heading">
+                <div class="panel-title text-center">
+                    <h1 class="title">About</h1>
+                    <hr/>
                 </div>
             </div>
-
-            <div class="form-group">
-                <div class="cols-sm-10">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                        <input type="password" class="form-control" name="password" id="password" placeholder="Password"/>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <p>Organization: <a href="https://github.com/binaryprogrammers">BinaryProgrammers</a></p>
+                            <p>Team Website: <a href="https://github.com/binaryprogrammers">Team Signature</a></p>
+                            <p>Software Engineers: </p>
+                            <p> 1. Bharat Devaguptapu</p>
+                            <p> 2. Jose Silva </p>
+                            <p> 3. Kevin Ali</p>
+                            <p> 4. Hardeep Singh</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
+        </div>
+    </div>
 
-            <div class="form-group ">
-                <button type="submit" class="btn btn-primary btn-block login-button">Login</button>
+    <!--Load Contact Info-->
+    <div class="panel-collapse collapse" id="contact">
+        <div class="main-login main-center">
+            <div class="panel-heading">
+                <div class="panel-title text-center">
+                    <h1 class="title">Contact</h1>
+                    <hr/>
+                </div>
             </div>
-
-            <hr />
-            <p th:if="${param.error}" align="center"> Invalid username and password. Try again!</p>
-            <p th:if="${param.logout}" align="center"> You have been logged out. <br/> Have a good day!</p>
-            <hr />
-
-            <div class="login-register">
-                <a href="/registration">Don't have an account, Register Here!</a>
-            </div>
-        </form>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <p>Organization: <a href="https://github.com/binaryprogrammers">BinaryProgrammers</a></p>
+                            <p>Team Website: <a href="https://github.com/binaryprogrammers">Team Signature</a></p>
+                            <p>Email: reminderservice@google.com</p>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 </body>

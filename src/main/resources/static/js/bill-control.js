@@ -4,8 +4,7 @@
 function addBill() {
     var name = $('#billName').val();
     var amount = $('#billAmount').val();
-    var duedate = $('#billDueDate').val();
-    alert(duedate);
+    var duedate = $('#billDate').val();
 
     if (name && duedate) {
         $.ajax(
@@ -44,7 +43,7 @@ function deleteBill(id) {
                 if (result === "error") {
                     alert("Error occurred while deleting, Try again!");
                 } else {
-                    alert("Bill Deleted!");
+                    // alert("Bill Deleted!");
                     location.reload();
                 }
             },
@@ -65,7 +64,7 @@ function paidBill(id) {
                 if (result === "error") {
                     alert("Error occurred while updating, Try again!");
                 } else {
-                    alert("Bill Updated!");
+                    // alert("Bill Updated!");
                     location.reload();
                 }
             },
@@ -78,5 +77,5 @@ function paidBill(id) {
 
 //Date Picker
 $(function () {
-    $("#billDueDate").datepicker();
+    $(".date").datepicker();
 });

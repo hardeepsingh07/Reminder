@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
+
+    <!-- Website Font style -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"/>
+
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'/>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'/>
+
+    <!-- First include jquery js -->
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+    <script src="/js/bootstrap.min.js/"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+
+    <!--Custom Sheets/Scripts-->
+    <link rel="stylesheet" href="/css/login.css"/>
+
+    <title>Reminder</title>
+</head>
+<body background="/image/background.jpg">
+<div class="container">
+    <div class="main-login main-center">
+        <div class="panel-heading">
+            <div class="panel-title text-center">
+                <h1 class="title">Reminder</h1>
+                <hr/>
+            </div>
+        </div>
+        <form th:action="@{/home}" class="form-horizontal" method="post">
+
+            <div class="form-group">
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Email"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Password"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group ">
+                <button type="submit" class="btn btn-primary btn-block login-button">Login</button>
+            </div>
+
+            <hr />
+            <p th:if="${param.error}" align="center"> Invalid username and password. Try again!</p>
+            <p th:if="${param.logout}" align="center"> You have been logged out. <br/> Have a good day!</p>
+            <hr />
+
+            <div class="login-register">
+                <a href="/registration">Don't have an account, Register Here!</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
