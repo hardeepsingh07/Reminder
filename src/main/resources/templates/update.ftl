@@ -173,7 +173,7 @@
 
                                 <div class="form-group">
                                     <button class="btn btn-danger btn-md btn-block"
-                                            onclick="alert('Under Constrction!')">Clear All Bills
+                                            onclick="clearBills()">Clear All Bills
                                     </button>
                                 </div>
                             </div>

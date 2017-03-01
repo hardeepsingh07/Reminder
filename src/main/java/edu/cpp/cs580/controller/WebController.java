@@ -137,7 +137,7 @@ public class WebController {
     }
 
     //delete all bills
-    @RequestMapping(value = "/clearbills", method = RequestMethod.POST)
+    @RequestMapping(value = "/clearbills", method = RequestMethod.GET)
     String deleteAllBills() {
         try {
            Users users = customUserService.getCurrentuser();
@@ -176,7 +176,7 @@ public class WebController {
         modelAndView.addObject("currentuser", customUserService.getCurrentuser());
         return modelAndView;
     }
-    
+
     @RequestMapping(value = "/log/{logString}", method = RequestMethod.GET)
     String logger(@PathVariable("logString") String logString) {
         Logger.debug(logString);

@@ -114,7 +114,7 @@ function updateProfile() {
 function clearBills() {
     $.ajax(
         {
-            type: "POST",
+            type: "GET",
             url: "/clearbills",
             data: {},
             success: function (result) {
@@ -122,6 +122,7 @@ function clearBills() {
                     alert("Error occurred while deleting, Try again!");
                 } else {
                     alert("All Bills Deleted!!");
+                    location.reload();
                 }
             },
             error: function (jgHXR, Exception) {
