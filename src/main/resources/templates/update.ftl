@@ -79,7 +79,7 @@
                     <#--</li>-->
                     <#--<li class="divider"></li>-->
                     <li>
-                        <a href="" id="logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        <a id="logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         <script type="text/javascript">
                             document.getElementById("logout").onclick = function () {
                                 location.href = "/logout";
