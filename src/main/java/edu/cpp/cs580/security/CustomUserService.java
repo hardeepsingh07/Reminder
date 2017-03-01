@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomUserService implements UserDetailsService {
     private final UsersManager usersManager;
+    private Users currentuser;
 
     @Autowired
     public CustomUserService(UsersManager usersManager) {
@@ -23,11 +24,15 @@ public class CustomUserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Users user = usersManager.findByEmail(username).get(0);
-        if(user.isVerified()){
-        	 return new CustomUser(user);
+        currentuser = usersManager.findByEmail(username).get(0);
+        if(currentuser.isVerified()){
+        	 return new CustomUser(currentuser);
         }
         else 
         	return null;
+    }
+
+    public Users getCurrentuser() {
+        return currentuser;
     }
 }

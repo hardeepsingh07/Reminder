@@ -49,7 +49,6 @@
 <body>
 
 <div id="wrapper">
-
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="navbar-header">
@@ -65,19 +64,20 @@
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                        class="fa fa-user"></i> ${currentuser.name} <b
                         class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                    </li>
-                    <li class="divider"></li>
+                    <#--<li>-->
+                        <#--<a><i class="fa fa-fw fa-user"></i>-->
+                            <#--Profile-->
+                        <#--</a>-->
+                        <#--<button class="btn btn-primary btn-xs" data-toggle="modal"-->
+                                <#--data-target="#myModalNorm">-->
+                            <#--Launch Normal Form-->
+                        <#--</button>-->
+                    <#--</li>-->
+                    <#--<li class="divider"></li>-->
                     <li>
                         <a href="" id="logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         <script type="text/javascript">
@@ -96,7 +96,7 @@
                     <a href="/update"><i class="fa fa-fw fa-dashboard"></i>Dashboard</a>
                 </li>
                 <li>
-                    <a href="/login"><i class="fa fa-fw fa-bar-chart-o"></i>LogIn</a>
+                    <a data-toggle="modal" data-target="#myModalNorm"><i class="fa fa-fw fa-bar-chart-o"></i>Profile</a>
                 </li>
                 <li>
                     <a href="/registration"><i class="fa fa-fw fa-table"></i>Registration</a>
@@ -104,6 +104,96 @@
             </ul>
         </div>
     </nav>
+
+    <#--update profile model-->
+    <div class="modal fade" id="myModalNorm" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close"
+                            data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                    ${currentuser.name}'s Profile
+                    </h4>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+
+                    <form role="form">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="nName">Name</label>
+                                    <input type="text" class="form-control"
+                                           id="mName" placeholder="Enter Name"
+                                           value="${currentuser.name}"/>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="mEmail">Email address</label>
+                                    <input type="email" class="form-control"
+                                           id="mEmail" placeholder="Enter Email"
+                                           value="${currentuser.email}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mPassword">Password</label>
+                                    <input type="password" class="form-control"
+                                           id="mPassword" placeholder="Enter Password"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mConfirmPassword">Confirm Password</label>
+                                    <input type="password" class="form-control"
+                                           id="mConfirmPassword" placeholder="Confirm Password"/>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="mNumber">Number</label>
+                                    <input type="number" class="form-control"
+                                           id="mNumber" placeholder="Enter Mobile Number"
+                                           value="${currentuser.number}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mServiceProvider">Password</label>
+                                    <select class="form-control" id="mServiceProvider">
+                                        <option>Verizon</option>
+                                        <option>Sprint</option>
+                                        <option>ATT</option>
+                                        <option>TMobile</option>
+                                        <option>Virgin Mobile</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <button class="btn btn-danger btn-md btn-block"
+                                            onclick="alert('Under Constrction!')">Clear All Bills
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="updateProfile()">
+                        Save changes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div id="page-wrapper">
 
@@ -207,10 +297,7 @@
             </div>
 
         </div>
-
     </div>
-
 </div>
-
 </body>
 </html>

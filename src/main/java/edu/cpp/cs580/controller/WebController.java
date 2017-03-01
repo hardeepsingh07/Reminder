@@ -2,6 +2,8 @@ package edu.cpp.cs580.controller;
 
 import edu.cpp.cs580.manager.BillManager;
 import edu.cpp.cs580.manager.UsersManager;
+import edu.cpp.cs580.security.CustomUser;
+import edu.cpp.cs580.security.CustomUserService;
 import edu.cpp.cs580.service.EmailService;
 import edu.cpp.cs580.util.Bill;
 import edu.cpp.cs580.util.Users;
@@ -18,10 +20,7 @@ import org.slf4j.Logger;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 
 @RestController
@@ -37,6 +36,9 @@ public class WebController {
     @Autowired
     EmailService service;
 
+    @Autowired
+    CustomUserService customUserService;
+
     private static final Logger Logger = LoggerFactory.getLogger(WebController.class);
 
     //process registration
@@ -51,7 +53,7 @@ public class WebController {
             String code = service.registerUser(rName, rEmail, rProvider, rNumber);
 
             //save to the database make a new entry
-            Users users = new Users(rName, rEmail, rPassword, rProvider, rNumber, code, false, "0:");
+            Users users = new Users(rName, rEmail, rPassword, rProvider, rNumber, code, false, "");
             usersManager.save(users);
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -88,19 +90,16 @@ public class WebController {
 
             Bill bill = new Bill(name, amount, parsedDate, false);
             billManager.save(bill);
+
+            //connect the bill to user
+            Users users = customUserService.getCurrentuser();
+            users.setBills(users.getBills() + bill.getId() + ":");
+            usersManager.save(users);
         } catch (Exception e) {
             System.out.println(e.toString());
             return "error";
         }
         return "success";
-    }
-
-    @RequestMapping(value = "/bill")
-    ModelAndView getAllBills() {
-        ArrayList<Bill> bills = (ArrayList<Bill>) billManager.findAll();
-        ModelAndView modelAndView = new ModelAndView("bill");
-        modelAndView.addObject("bills", bills);
-        return modelAndView;
     }
 
     //Change paid status of bill
@@ -116,6 +115,40 @@ public class WebController {
         return "error";
     }
 
+    @RequestMapping(value="/userupdate/{name}", method = RequestMethod.POST)
+    String updateUserProfile(@PathVariable("name") String name,
+                             @RequestParam("email") String email,
+                             @RequestParam("password") String password,
+                             @RequestParam("number") String number,
+                             @RequestParam("serviceprovider") String serviceprovider) {
+        Users users = customUserService.getCurrentuser();
+        if(!name.equals(users.getName())) { users.setName(name); }
+        if(!email.equals(users.getEmail())) { users.setEmail(email); }
+        if(!password.equals("")) { users.setPassword(password); }
+        if(!number.equals(users.getNumber())) { users.setEmail(number); }
+        if(!serviceprovider.equals(users.getServiceProvider())) { users.setServiceProvider(serviceprovider); }
+
+        try {
+            usersManager.save(users);
+        } catch (Exception e) {
+            return "error";
+        }
+        return "success";
+    }
+
+    //delete all bills
+    @RequestMapping(value = "/clearbills", method = RequestMethod.POST)
+    String deleteAllBills() {
+        try {
+           Users users = customUserService.getCurrentuser();
+           users.setBills("");
+           usersManager.save(users);
+        } catch (Exception e) {
+            return "error";
+        }
+        return "success";
+    }
+
     //delete bill
     @RequestMapping(value = "/bill/{id}", method = RequestMethod.DELETE)
     String deleteBill(@PathVariable("id") String id) {
@@ -127,6 +160,23 @@ public class WebController {
         return "success";
     }
 
+    @RequestMapping(value = "/update")
+    ModelAndView update() {
+        Users users = customUserService.getCurrentuser();
+        ArrayList<Bill> userBiills = new ArrayList<>();
+        String billString = users.getBills();
+        if(!billString.equals("")) {
+            String[] token = users.getBills().split(":");
+            for (int i = 0; i < token.length; i++) {
+                userBiills.add(billManager.findById(Integer.parseInt(token[i])).get(0));
+            }
+        }
+        ModelAndView modelAndView = new ModelAndView("update");
+        modelAndView.addObject("bills", userBiills);
+        modelAndView.addObject("currentuser", customUserService.getCurrentuser());
+        return modelAndView;
+    }
+    
     @RequestMapping(value = "/log/{logString}", method = RequestMethod.GET)
     String logger(@PathVariable("logString") String logString) {
         Logger.debug(logString);
@@ -157,14 +207,6 @@ public class WebController {
     @RequestMapping(value = "/registration")
     ModelAndView loadRegistration() {
         ModelAndView modelAndView = new ModelAndView("registration");
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/update")
-    ModelAndView update() {
-        ArrayList<Bill> bills = (ArrayList<Bill>) billManager.findAll();
-        ModelAndView modelAndView = new ModelAndView("update");
-        modelAndView.addObject("bills", bills);
         return modelAndView;
     }
 }

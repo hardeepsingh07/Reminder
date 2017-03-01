@@ -74,3 +74,4 @@ function checkCode() {
         alert("Please enter the code");
     }
 }
+
