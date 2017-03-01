@@ -44,6 +44,10 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" data-semver="3.1.1"
+            data-require="bootstrap"></script>
+    <script src="http://bootboxjs.com/bootbox.js"></script>
 </head>
 
 <body>
@@ -68,16 +72,6 @@
                         class="fa fa-user"></i> ${currentuser.name} <b
                         class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <#--<li>-->
-                        <#--<a><i class="fa fa-fw fa-user"></i>-->
-                            <#--Profile-->
-                        <#--</a>-->
-                        <#--<button class="btn btn-primary btn-xs" data-toggle="modal"-->
-                                <#--data-target="#myModalNorm">-->
-                            <#--Launch Normal Form-->
-                        <#--</button>-->
-                    <#--</li>-->
-                    <#--<li class="divider"></li>-->
                     <li>
                         <a id="logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         <script type="text/javascript">
@@ -105,7 +99,7 @@
         </div>
     </nav>
 
-    <#--update profile model-->
+<#--update profile model-->
     <div class="modal fade" id="myModalNorm" tabindex="-1" role="dialog"
          aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -172,9 +166,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <button class="btn btn-danger btn-md btn-block"
-                                            onclick="clearBills()">Clear All Bills
-                                    </button>
+                                    <button class="btn btn-danger btn-md btn-block" onclick="clearBills()">Clear All Bills</button>
                                 </div>
                             </div>
                         </div>
@@ -242,8 +234,8 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-6">
-                                <div class="date"></div>
+                            <div align="center" class="col-lg-6">
+                                <div align="center" class="date"></div>
                                 <script>
                                     $('.date').datepicker({
                                         format: 'mm/dd/yyyy',

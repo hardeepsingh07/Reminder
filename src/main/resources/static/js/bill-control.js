@@ -111,6 +111,8 @@ function updateProfile() {
     }
 }
 
+
+//clear all bills
 function clearBills() {
     $.ajax(
         {
@@ -119,14 +121,14 @@ function clearBills() {
             data: {},
             success: function (result) {
                 if (result === "error") {
-                    alert("Error occurred while deleting, Try again!");
+                    console.log("Error occurred while deleting, Try again!");
                 } else {
-                    alert("All Bills Deleted!!");
+                    console.log("All Bills Deleted!!");
                     location.reload();
                 }
             },
             error: function (jgHXR, Exception) {
-                alert("Error: Couldn't process the request");
+               console.log("Error: Couldn't process the request");
             }
         }
     )
