@@ -9,7 +9,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+    <title>Dashboard</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/css/main/bootstrap.min.css" rel="stylesheet"/>
@@ -254,7 +254,7 @@
                 <div class="col-lg-6">
                     <h2>Bills</h2>
                     <div class="table-responsive">
-                        <table class="table table-bordered table-hover table-striped">
+                        <table class="table table-bordered table text-center table-hover table-striped">
                             <thead align="center">
                             <tr align="center">
                                 <th>Bill Name</th>
@@ -267,16 +267,15 @@
                             <tbody align="center" valign="center">
                             <#list bills as bill>
                             <tr>
-                            <#--<td>${bill.id}</td>-->
                                 <td>${bill.name}</td>
                                 <td>$${bill.amount}</td>
-                                <td>${bill.duedate}</td>
+                                <td>${bill.duedate?string["MMMM dd, yyyy"]}</td>
                                 <td>${bill.status?string('Paid', 'Unpaid')}</td>
                                 <td>
-                                    <button class="btn-success btn-xs" onclick="paidBill('${bill.id}')">Paid</button>
+                                    <button class="btn btn-success btn-xs" onclick="paidBill('${bill.id}')">Paid</button>
                                 </td>
                                 <td>
-                                    <button class="btn-danger btn-xs" onclick="deleteBill('${bill.id}')">Delete</button>
+                                    <button class="btn btn-danger btn-xs" onclick="deleteBill('${bill.id}')">Delete</button>
                                 </td>
                             </tr>
                             </#list>

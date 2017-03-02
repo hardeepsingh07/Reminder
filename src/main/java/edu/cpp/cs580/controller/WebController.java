@@ -39,8 +39,6 @@ public class WebController {
     @Autowired
     CustomUserService customUserService;
 
-    private static final Logger Logger = LoggerFactory.getLogger(WebController.class);
-
     //Process registration
     @RequestMapping(value = "/processRegistration/{rName}", method = RequestMethod.GET)
     String register(@PathVariable("rName") String rName,
@@ -216,9 +214,3 @@ public class WebController {
         return modelAndView;
     }
 }
-
-//    @RequestMapping(value = "/log/{logString}", method = RequestMethod.GET)
-//    String logger(@PathVariable("logString") String logString) {
-//        Logger.debug(logString);
-//        return "Successfully Logged " + logString;
-//    }
