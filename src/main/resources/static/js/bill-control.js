@@ -99,6 +99,7 @@ function updateProfile() {
                         alert("Error occurred while updating, Try again!");
                     } else {
                         alert("Profile Updated!!");
+                        location.reload();
                     }
                 },
                 error: function (jgHXR, Exception) {

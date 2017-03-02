@@ -41,7 +41,7 @@ public class WebController {
 
     private static final Logger Logger = LoggerFactory.getLogger(WebController.class);
 
-    //process registration
+    //Process registration
     @RequestMapping(value = "/processRegistration/{rName}", method = RequestMethod.GET)
     String register(@PathVariable("rName") String rName,
                     @RequestParam("rEmail") String rEmail,
@@ -77,7 +77,7 @@ public class WebController {
         return "invalid";
     }
 
-    //Bill Info
+    //Add Bill Info
     @RequestMapping(value = "/bill/{name}", method = RequestMethod.GET)
     String saveBill(@PathVariable("name") String name,
                     @RequestParam("amount") String amount,
@@ -102,7 +102,7 @@ public class WebController {
         return "success";
     }
 
-    //Change paid status of bill
+    //Change Paid status of bill
     @RequestMapping(value = "/bill/{id}", method = RequestMethod.POST)
     String updateBill(@PathVariable("id") String id) {
         ArrayList<Bill> bills = (ArrayList<Bill>) billManager.findById(Integer.parseInt(id));
@@ -115,6 +115,7 @@ public class WebController {
         return "error";
     }
 
+    //Update User Profile
     @RequestMapping(value="/userupdate/{name}", method = RequestMethod.POST)
     String updateUserProfile(@PathVariable("name") String name,
                              @RequestParam("email") String email,
@@ -136,7 +137,7 @@ public class WebController {
         return "success";
     }
 
-    //delete all bills
+    //Delete all bills
     @RequestMapping(value = "/clearbills", method = RequestMethod.GET)
     String deleteAllBills() {
         try {
@@ -149,54 +150,34 @@ public class WebController {
         return "success";
     }
 
-    //delete bill
+    //Delete single bill
     @RequestMapping(value = "/bill/{id}", method = RequestMethod.DELETE)
     String deleteBill(@PathVariable("id") String id) {
         try {
-            billManager.delete(Integer.parseInt(id));
+            Users users = customUserService.getCurrentuser();
+            String bills = users.getBills();
+            bills = bills.replace(id + ":", "");
+            users.setBills(bills);
+            usersManager.save(users);
+
+//            billManager.delete(Integer.parseInt(id));
         } catch (Exception e) {
             return "error";
         }
         return "success";
     }
 
-    @RequestMapping(value = "/update")
-    ModelAndView update() {
-        Users users = customUserService.getCurrentuser();
-        ArrayList<Bill> userBiills = new ArrayList<>();
-        String billString = users.getBills();
-        if(!billString.equals("")) {
-            String[] token = users.getBills().split(":");
-            for (int i = 0; i < token.length; i++) {
-                userBiills.add(billManager.findById(Integer.parseInt(token[i])).get(0));
-            }
-        }
-        ModelAndView modelAndView = new ModelAndView("update");
-        modelAndView.addObject("bills", userBiills);
-        modelAndView.addObject("currentuser", customUserService.getCurrentuser());
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/log/{logString}", method = RequestMethod.GET)
-    String logger(@PathVariable("logString") String logString) {
-        Logger.debug(logString);
-        return "Successfully Logged " + logString;
-    }
 
 
-    //Load Model and Views
+    //--------------------------------------Load Page View------------------------------------
+    //Home
     @RequestMapping(value = "/home")
     ModelAndView home() {
         ModelAndView modelAndView = new ModelAndView("home");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/verification")
-    ModelAndView verification() {
-        ModelAndView modelAndView = new ModelAndView("verification");
-        return modelAndView;
-    }
-
+    //Login
     @RequestMapping(value = "/login")
     ModelAndView logIn() {
         ModelAndView modelAndView = new ModelAndView("login");
@@ -209,4 +190,35 @@ public class WebController {
         ModelAndView modelAndView = new ModelAndView("registration");
         return modelAndView;
     }
+
+    //Verification
+    @RequestMapping(value = "/verification")
+    ModelAndView verification() {
+        ModelAndView modelAndView = new ModelAndView("verification");
+        return modelAndView;
+    }
+
+    //Load Main Dashboard
+    @RequestMapping(value = "/dashboard")
+    ModelAndView update() {
+        Users users = customUserService.getCurrentuser();
+        ArrayList<Bill> userBiills = new ArrayList<>();
+        String billString = users.getBills();
+        if(!billString.equals("")) {
+            String[] token = users.getBills().split(":");
+            for (int i = 0; i < token.length; i++) {
+                userBiills.add(billManager.findById(Integer.parseInt(token[i])).get(0));
+            }
+        }
+        ModelAndView modelAndView = new ModelAndView("dashboard");
+        modelAndView.addObject("bills", userBiills);
+        modelAndView.addObject("currentuser", customUserService.getCurrentuser());
+        return modelAndView;
+    }
 }
+
+//    @RequestMapping(value = "/log/{logString}", method = RequestMethod.GET)
+//    String logger(@PathVariable("logString") String logString) {
+//        Logger.debug(logString);
+//        return "Successfully Logged " + logString;
+//    }

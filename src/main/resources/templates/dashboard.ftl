@@ -88,9 +88,9 @@
                 <li>
                     <a data-toggle="modal" data-target="#myModalNorm"><i class="fa fa-fw fa-bar-chart-o"></i>Profile</a>
                 </li>
-                <li>
-                    <a href="/registration"><i class="fa fa-fw fa-table"></i>Registration</a>
-                </li>
+                <#--<li>-->
+                    <#--<a href="/registration"><i class="fa fa-fw fa-table"></i>Registration</a>-->
+                <#--</li>-->
             </ul>
         </div>
     </nav>

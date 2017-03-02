@@ -28,8 +28,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/home") 
-                	.permitAll()
+                .loginPage("/home")
+//                .defaultSuccessUrl("/dashboard.ftl", true)
+                .permitAll()
                 .and()
                 .logout()
                 	.permitAll();
@@ -42,4 +43,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
           auth.userDetailsService(userDetailsService);
     }
+
+
 }
