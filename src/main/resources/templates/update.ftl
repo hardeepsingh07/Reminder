@@ -44,10 +44,6 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" data-semver="3.1.1"
-            data-require="bootstrap"></script>
-    <script src="http://bootboxjs.com/bootbox.js"></script>
 </head>
 
 <body>
@@ -166,7 +162,9 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <button class="btn btn-danger btn-md btn-block" onclick="clearBills()">Clear All Bills</button>
+                                    <button class="btn btn-danger btn-md btn-block" onclick="clearBills()">Clear All
+                                        Bills
+                                    </button>
                                 </div>
                             </div>
                         </div>
