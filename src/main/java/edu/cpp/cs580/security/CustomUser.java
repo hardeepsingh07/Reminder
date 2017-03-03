@@ -6,8 +6,11 @@ import java.util.Collections;
 import java.util.List;
 
 import edu.cpp.cs580.util.Users;
+
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 
@@ -48,6 +51,8 @@ public class CustomUser  extends Users implements UserDetails {
 
     @Override
     public String getUsername() {
+    	
+    	String authenticatedUserId = SecurityContextHolder.getContext().getAuthentication().getName();
         return super.getEmail();
     }
 
