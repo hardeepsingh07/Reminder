@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="cs580" />
+        <module name="Reminder" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="cs580" target="1.8" />
+      <module name="Reminder" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

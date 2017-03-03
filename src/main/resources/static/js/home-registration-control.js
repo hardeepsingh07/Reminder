@@ -11,8 +11,6 @@ function handleRegistration() {
     var rConfirmPassword = $('#rConfirmPassword').val();
     var rProvider = $('#rProvider').val();
     var rNumber = $('#rNumber').val();
-
-    alert(rNumber + rName + rPassword + rProvider);
     
     if(rName && rEmail && rProvider && rNumber && rPassword && rConfirmPassword) {
         if(rPassword === rConfirmPassword) {
