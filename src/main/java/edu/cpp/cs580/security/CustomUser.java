@@ -52,9 +52,7 @@ public class CustomUser  extends Users implements UserDetails {
     @Override
     public String getUsername() {
     	
-    	String authenticatedUserId = SecurityContextHolder.getContext().getAuthentication().getName();
-        return authenticatedUserId;
-    	//return super.getEmail();
+    	return super.getEmail();
     }
 
     @Override

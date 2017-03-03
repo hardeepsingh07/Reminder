@@ -10,6 +10,7 @@ import edu.cpp.cs580.util.Users;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -199,18 +200,18 @@ public class WebController {
 
     //Load Main Dashboard
     @RequestMapping(value = "/dashboard")
-    ModelAndView update() {
-        Users users = customUserService.getCurrentuser();
-        ArrayList<Bill> userBiills = new ArrayList<>();
+    ModelAndView update(@ModelAttribute("Users") Users users) {
+        //Users users = customUserService.getCurrentuser();
+        ArrayList<Bill> userBills = new ArrayList<>();
         String billString = users.getBills();
         if(!billString.equals("")) {
             String[] token = users.getBills().split(":");
             for (int i = 0; i < token.length; i++) {
-                userBiills.add(billManager.findById(Integer.parseInt(token[i])).get(0));
+                userBills.add(billManager.findById(Integer.parseInt(token[i])).get(0));
             }
         }
         ModelAndView modelAndView = new ModelAndView("dashboard");
-        modelAndView.addObject("bills", userBiills);
+        modelAndView.addObject("bills", userBills);
         modelAndView.addObject("currentuser", customUserService.getCurrentuser());
         return modelAndView;
     }
