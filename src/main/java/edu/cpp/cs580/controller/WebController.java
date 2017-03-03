@@ -24,7 +24,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-@SessionAttributes("Users")
+
 @RestController
 public class WebController {
 
@@ -200,8 +200,8 @@ public class WebController {
 
     //Load Main Dashboard
     @RequestMapping(value = "/dashboard")
-    ModelAndView update(@ModelAttribute("Users") Users users) {
-        //Users users = customUserService.getCurrentuser();
+    ModelAndView update() {
+        Users users = customUserService.getCurrentuser();
         ArrayList<Bill> userBills = new ArrayList<>();
         String billString = users.getBills();
         if(!billString.equals("")) {
