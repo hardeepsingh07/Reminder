@@ -4,9 +4,9 @@ Binary Programmer, Cs 580
 Overview
 --------
 
-The skeleton of the demo web project for CS580.
+A Reminder Service
 
-This project is designed to let you practice the different aspects of software engineering, such as version control, design, tests, build, deployment, and maintenance.
+Project allows user to setup bill reminders. Reminders are delivered by text messages on specifiied remiding times. 
 
 Environment Setup
 -----------------
@@ -30,13 +30,6 @@ Running the Project Locally
 ----------------------------------------
 1. Locate the App.java in src/main/java source folder and right-click on it->Run As->Java Application
 2. Verify the running process in your web browser by the following URLs:
-
-- http://localhost:8080/
-- http://localhost:8080/cs580/ping
-- http://localhost:8080/cs580/home
-- http://localhost:8080/home-ajs.html
-
-
-Change for A8 Test
+ - http://localhost:8080/
 
  
