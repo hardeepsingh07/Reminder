@@ -17,4 +17,6 @@ public interface BillManager extends CrudRepository<Bill, Integer> {
     List<Bill> findByAmount(String amount);
 
     List<Bill> findByDuedate(String date);
+
+    List<Bill> findByUserid(int id);
 }

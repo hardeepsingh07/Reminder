@@ -24,7 +24,6 @@ public class Users implements Serializable {
     private String number;
     private String vcode;
     private boolean verified;
-    private String bills;
 
     public Users() {}
 
@@ -36,11 +35,10 @@ public class Users implements Serializable {
         this.number = users.number;
         this.vcode = users.vcode;
         this.verified = users.verified;
-        this.bills = users.bills;
     }
 
     public Users(String name, String email, String password, String serviceprovider, String number, String vcode,
-                 boolean verified, String bills) {
+                 boolean verified) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -48,7 +46,6 @@ public class Users implements Serializable {
         this.number = number;
         this.vcode = vcode;
         this.verified = verified;
-        this.bills = bills;
     }
 
     public Integer getId() {
@@ -113,13 +110,5 @@ public class Users implements Serializable {
 
     public void setVerified(boolean verified) {
         this.verified = verified;
-    }
-
-    public String getBills() {
-        return bills;
-    }
-
-    public void setBills(String bills) {
-        this.bills = bills;
     }
 }

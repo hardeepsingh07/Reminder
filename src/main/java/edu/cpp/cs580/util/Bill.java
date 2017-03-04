@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -20,14 +21,26 @@ public class Bill {
     private String amount;
     private Date duedate;
     private boolean status;
+    private int userid;
 
     public Bill() {}
 
-    public Bill(String name, String amount, Date duedate, boolean status) {
+    public Bill(String name, String amount, Date duedate, boolean status, int userid) {
         this.name = name;
         this.amount = amount;
         this.duedate = duedate;
         this.status = status;
+        this.userid = userid;
+    }
+
+    public String getFormattedDate() {
+        SimpleDateFormat output = new SimpleDateFormat("yyyy-MM-dd");
+        return output.format(this.getDuedate());
+    }
+
+    public String getTextFormattedDate() {
+        SimpleDateFormat output = new SimpleDateFormat("MMM dd, yyyy");
+        return output.format(this.getDuedate());
     }
 
     public int getId() {
@@ -70,4 +83,11 @@ public class Bill {
         this.status = status;
     }
 
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
 }

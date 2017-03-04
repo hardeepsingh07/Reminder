@@ -43,7 +43,6 @@ function deleteBill(id) {
                 if (result === "error") {
                     alert("Error occurred while deleting, Try again!");
                 } else {
-                    // alert("Bill Deleted!");
                     location.reload();
                 }
             },
@@ -64,7 +63,6 @@ function paidBill(id) {
                 if (result === "error") {
                     alert("Error occurred while updating, Try again!");
                 } else {
-                    // alert("Bill Updated!");
                     location.reload();
                 }
             },
@@ -125,7 +123,10 @@ function clearBills() {
                     console.log("Error occurred while deleting, Try again!");
                 } else {
                     console.log("All Bills Deleted!!");
-                    location.reload();
+                    setTimeout(
+                        function() {
+                            location.reload();
+                        }, 1500);
                 }
             },
             error: function (jgHXR, Exception) {

@@ -53,7 +53,7 @@ public class WebController {
             String code = service.registerUser(rName, rEmail, rProvider, rNumber);
 
             //save to the database make a new entry
-            Users users = new Users(rName, rEmail, rPassword, rProvider, rNumber, code, false, "");
+            Users users = new Users(rName, rEmail, rPassword, rProvider, rNumber, code, false);
             usersManager.save(users);
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -84,19 +84,15 @@ public class WebController {
                     @RequestParam("duedate") String duedate) {
 
         try {
+            Users currentuser = customUserService.getCurrentuser();
+
             Date initDate = new SimpleDateFormat("MM/dd/yyyy").parse(duedate);
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Date parsedDate = formatter.parse(formatter.format(initDate));
 
-            Bill bill = new Bill(name, amount, parsedDate, false);
+            Bill bill = new Bill(name, amount, parsedDate, false, currentuser.getId());
             billManager.save(bill);
-
-            //connect the bill to user
-            Users users = customUserService.getCurrentuser();
-            users.setBills(users.getBills() + bill.getId() + ":");
-            usersManager.save(users);
         } catch (Exception e) {
-            System.out.println(e.toString());
             return "error";
         }
         return "success";
@@ -141,9 +137,12 @@ public class WebController {
     @RequestMapping(value = "/clearbills", method = RequestMethod.GET)
     String deleteAllBills() {
         try {
-           Users users = customUserService.getCurrentuser();
-           users.setBills("");
-           usersManager.save(users);
+            Users currentuser = customUserService.getCurrentuser();
+
+            List<Bill> bills = billManager.findByUserid(currentuser.getId());
+            for (Bill b: bills) {
+                billManager.delete(b.getId());
+            }
         } catch (Exception e) {
             return "error";
         }
@@ -154,13 +153,7 @@ public class WebController {
     @RequestMapping(value = "/bill/{id}", method = RequestMethod.DELETE)
     String deleteBill(@PathVariable("id") String id) {
         try {
-            Users users = customUserService.getCurrentuser();
-            String bills = users.getBills();
-            bills = bills.replace(id + ":", "");
-            users.setBills(bills);
-            usersManager.save(users);
-
-//            billManager.delete(Integer.parseInt(id));
+            billManager.delete(Integer.parseInt(id));
         } catch (Exception e) {
             return "error";
         }
@@ -201,15 +194,9 @@ public class WebController {
     //Load Main Dashboard
     @RequestMapping(value = "/dashboard")
     ModelAndView update() {
-        Users users = customUserService.getCurrentuser();
-        ArrayList<Bill> userBills = new ArrayList<>();
-        String billString = users.getBills();
-        if(!billString.equals("")) {
-            String[] token = users.getBills().split(":");
-            for (int i = 0; i < token.length; i++) {
-                userBills.add(billManager.findById(Integer.parseInt(token[i])).get(0));
-            }
-        }
+        Users currentuser = customUserService.getCurrentuser();
+
+        ArrayList<Bill> userBills = (ArrayList<Bill>) billManager.findByUserid(currentuser.getId());
         ModelAndView modelAndView = new ModelAndView("dashboard");
         modelAndView.addObject("bills", userBills);
         modelAndView.addObject("currentuser", customUserService.getCurrentuser());
