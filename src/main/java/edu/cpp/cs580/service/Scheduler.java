@@ -42,7 +42,7 @@ public class Scheduler {
     String billSubject = "Bill Reminder: ";
 
     //    @Scheduled(cron = "0,30 * * * * *")
-    @Scheduled(initialDelay = 5000, fixedRate = 10000)
+    @Scheduled(initialDelay = 5000, fixedRate = 86400000)
     public void testing() throws Exception {
         //Get all Bills
         List<Bill> bills = (ArrayList<Bill>) billManager.findAll();
