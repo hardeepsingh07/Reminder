@@ -4,22 +4,17 @@ import edu.cpp.cs580.manager.BillManager;
 import edu.cpp.cs580.manager.UsersManager;
 import edu.cpp.cs580.util.Bill;
 import edu.cpp.cs580.util.Users;
-import jdk.nashorn.internal.runtime.options.LoggingOption;
-import org.apache.commons.logging.LogFactory;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
