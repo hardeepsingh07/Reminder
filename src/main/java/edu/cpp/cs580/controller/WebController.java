@@ -10,6 +10,8 @@ import edu.cpp.cs580.util.Users;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +42,9 @@ public class WebController {
 
     @Autowired
     CustomUserService customUserService;
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
 
     //Process registration
     @RequestMapping(value = "/processRegistration/{rName}", method = RequestMethod.GET)
@@ -84,13 +89,15 @@ public class WebController {
                     @RequestParam("duedate") String duedate) {
 
         try {
-            Users currentuser = customUserService.getCurrentuser();
+            //Get current user from security
+            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            Users currentUser = usersManager.findByEmail(userDetails.getUsername()).get(0);
 
             Date initDate = new SimpleDateFormat("MM/dd/yyyy").parse(duedate);
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Date parsedDate = formatter.parse(formatter.format(initDate));
 
-            Bill bill = new Bill(name, amount, parsedDate, false, currentuser.getId());
+            Bill bill = new Bill(name, amount, parsedDate, false, currentUser.getId());
             billManager.save(bill);
         } catch (Exception e) {
             return "error";
@@ -118,7 +125,11 @@ public class WebController {
                              @RequestParam("password") String password,
                              @RequestParam("number") String number,
                              @RequestParam("serviceprovider") String serviceprovider) {
-        Users users = customUserService.getCurrentuser();
+
+        //Get current user from security
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Users users = usersManager.findByEmail(userDetails.getUsername()).get(0);
+
         if(!name.equals(users.getName())) { users.setName(name); }
         if(!email.equals(users.getEmail())) { users.setEmail(email); }
         if(!password.equals("")) { users.setPassword(password); }
@@ -137,9 +148,11 @@ public class WebController {
     @RequestMapping(value = "/clearbills", method = RequestMethod.GET)
     String deleteAllBills() {
         try {
-            Users currentuser = customUserService.getCurrentuser();
+            //Get current user from security
+            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            Users currentUser = usersManager.findByEmail(userDetails.getUsername()).get(0);
 
-            List<Bill> bills = billManager.findByUserid(currentuser.getId());
+            List<Bill> bills = billManager.findByUserid(currentUser.getId());
             for (Bill b: bills) {
                 billManager.delete(b.getId());
             }
@@ -194,12 +207,15 @@ public class WebController {
     //Load Main Dashboard
     @RequestMapping(value = "/dashboard")
     ModelAndView update() {
-        Users currentuser = customUserService.getCurrentuser();
+        //Get current user from security
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Users currentUser = usersManager.findByEmail(userDetails.getUsername()).get(0);
+        logger.info(userDetails.getUsername());
 
-        ArrayList<Bill> userBills = (ArrayList<Bill>) billManager.findByUserid(currentuser.getId());
+        ArrayList<Bill> userBills = (ArrayList<Bill>) billManager.findByUserid(currentUser.getId());
         ModelAndView modelAndView = new ModelAndView("dashboard");
         modelAndView.addObject("bills", userBills);
-        modelAndView.addObject("currentuser", customUserService.getCurrentuser());
+        modelAndView.addObject("currentuser", currentUser);
         return modelAndView;
     }
 }

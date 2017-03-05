@@ -50,8 +50,12 @@ public class CustomUser  extends Users implements UserDetails {
     }
 
     @Override
+    public Integer getId() {
+        return super.getId();
+    }
+
+    @Override
     public String getUsername() {
-    	
     	return super.getEmail();
     }
 
