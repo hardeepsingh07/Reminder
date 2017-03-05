@@ -252,7 +252,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <h2>Bills</h2>
+                    <h2>Notifiable Bills</h2>
                     <div class="table-responsive">
                         <table class="table table-bordered table text-center table-hover table-striped">
                             <thead align="center">
@@ -265,7 +265,7 @@
                             </tr>
                             </thead>
                             <tbody align="center" valign="center">
-                            <#list bills as bill>
+                            <#list nBills as bill>
                             <tr>
                                 <td>${bill.name}</td>
                                 <td>$${bill.amount}</td>
@@ -285,6 +285,70 @@
                 </div>
             </div>
 
+            <#--second row-->
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2>Over-Due Bills</h2>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table text-center table-hover table-striped">
+                            <thead align="center">
+                            <tr align="center">
+                                <th>Bill Name</th>
+                                <th>Amount</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+                                <th colspan="2">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody align="center" valign="center">
+                            <#list odBills as bill>
+                            <tr class="danger">
+                                <td>${bill.name}</td>
+                                <td>$${bill.amount}</td>
+                                <td>${bill.duedate?string["MMMM dd, yyyy"]}</td>
+                                <td>${bill.status?string('Paid', 'Unpaid')}</td>
+                                <td>
+                                    <button class="btn btn-success btn-xs" onclick="paidBill('${bill.id}')">Paid</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger btn-xs" onclick="deleteBill('${bill.id}')">Delete</button>
+                                </td>
+                            </tr>
+                            </#list>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h2>Paid Bills</h2>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table text-center table-hover table-striped">
+                            <thead align="center">
+                            <tr align="center">
+                                <th>Bill Name</th>
+                                <th>Amount</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody align="center" valign="center">
+                            <#list pBills as bill>
+                            <tr class="success">
+                                <td>${bill.name}</td>
+                                <td>$${bill.amount}</td>
+                                <td>${bill.duedate?string["MMMM dd, yyyy"]}</td>
+                                <td>${bill.status?string('Paid', 'Unpaid')}</td>
+                                <td>
+                                    <button class="btn btn-danger btn-xs" onclick="deleteBill('${bill.id}')">Delete</button>
+                                </td>
+                            </tr>
+                            </#list>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

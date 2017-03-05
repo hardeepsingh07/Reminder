@@ -41,79 +41,76 @@ public class Scheduler {
         //Get all Bills
         List<Bill> bills = (ArrayList<Bill>) billManager.findAll();
 
-        //Set Date format and get today's date
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String todayDate = LocalDate.now().toString();
-
         //Parse through the bills to get check number of days till due date
         for (Bill b : bills) {
-            LocalDate startDate = LocalDate.parse(todayDate, formatter);
-            LocalDate dueDate = LocalDate.parse(b.getFormattedDate(), formatter);
-            long numberOfDaysLeft = ChronoUnit.DAYS.between(startDate, dueDate);
-
-            //If 7 days left, remind once
-            if (numberOfDaysLeft <= 7) {
-                Users user = usersManager.findOne(b.getUserid());
-                emailService.sendSMS(user.getNumber(), user.getServiceProvider(),
-                        billSubject,
-                        "Your bill for " + b.getName() + " of amount $" + b.getAmount() + " is due within " + numberOfDaysLeft + " days. \n Bill Due Date: "
-                                + b.getTextFormattedDate());
-                logger.info("BILL - {} notified to USER - {} ::: DUE DATE - {}", b.getName(), user.getId(), b.getTextFormattedDate());
+            //If 7 days left, remind once, if status is not paid (false)
+            long numberOfDaysLeft = b.getNumberOfDays();
+            boolean isPaid = b.isStatus();
+            logger.info("Status: {} and Days: {}", isPaid, numberOfDaysLeft);
+            if (!isPaid && numberOfDaysLeft <= 7 && numberOfDaysLeft >= 0) {
+                reminder(b, numberOfDaysLeft);
             }
+
+            //Reminder User last time for their overdue bill
+            finalReminder(b, numberOfDaysLeft);
         }
     }
 
     @Scheduled(initialDelay = 43200000, fixedRate = 86400000)
-    public  void lessThan5() {
+    public void lessThan5() {
         //Get all Bills
         List<Bill> bills = (ArrayList<Bill>) billManager.findAll();
 
-        //Set Date format and get today's date
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String todayDate = LocalDate.now().toString();
-
         //Parse through the bills to get check number of days till due date
         for (Bill b : bills) {
-            LocalDate startDate = LocalDate.parse(todayDate, formatter);
-            LocalDate dueDate = LocalDate.parse(b.getFormattedDate(), formatter);
-            long numberOfDaysLeft = ChronoUnit.DAYS.between(startDate, dueDate);
-
-            //If 7 days left, remind once
-            if (numberOfDaysLeft <= 5) {
-                Users user = usersManager.findOne(b.getUserid());
-                emailService.sendSMS(user.getNumber(), user.getServiceProvider(),
-                        billSubject,
-                        "Your bill for " + b.getName() + " of amount $" + b.getAmount() + " is due within " + numberOfDaysLeft + " days. \n Bill Due Date: "
-                                + b.getTextFormattedDate());
-                logger.info("BILL - {} notified to USER - {} ::: DUE DATE - {}", b.getName(), user.getId(), b.getTextFormattedDate());
+            //If 5 days left, remind twice, if status is not paid (false)
+            long numberOfDaysLeft = b.getNumberOfDays();
+            boolean isPaid = b.isStatus();
+            if (!isPaid && numberOfDaysLeft <= 5 && numberOfDaysLeft >= 0) {
+                reminder(b, numberOfDaysLeft);
             }
+
+            //Reminder User last time for their overdue bill
+            finalReminder(b, numberOfDaysLeft);
         }
     }
 
     @Scheduled(initialDelay = 21600000, fixedRate = 86400000)
-    public  void lessThan3() {
+    public void lessThan3() {
         //Get all Bills
         List<Bill> bills = (ArrayList<Bill>) billManager.findAll();
 
-        //Set Date format and get today's date
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String todayDate = LocalDate.now().toString();
-
         //Parse through the bills to get check number of days till due date
         for (Bill b : bills) {
-            LocalDate startDate = LocalDate.parse(todayDate, formatter);
-            LocalDate dueDate = LocalDate.parse(b.getFormattedDate(), formatter);
-            long numberOfDaysLeft = ChronoUnit.DAYS.between(startDate, dueDate);
-
-            //If 7 days left, remind once
-            if (numberOfDaysLeft <= 3) {
-                Users user = usersManager.findOne(b.getUserid());
-                emailService.sendSMS(user.getNumber(), user.getServiceProvider(),
-                        billSubject,
-                        "Your bill for " + b.getName() + " of amount $" + b.getAmount() + " is due within " + numberOfDaysLeft + " days. \n Bill Due Date: "
-                                + b.getTextFormattedDate());
-                logger.info("BILL - {} notified to USER - {} ::: DUE DATE - {}", b.getName(), user.getId(), b.getTextFormattedDate());
+            //If 2 days left, remind four times, if status is not paid (false)
+            long numberOfDaysLeft = b.getNumberOfDays();
+            boolean isPaid = b.isStatus();
+            if (!isPaid && numberOfDaysLeft <= 3 && numberOfDaysLeft >= 0) {
+                reminder(b, numberOfDaysLeft);
             }
+
+            //Reminder User last time for their overdue bill
+            finalReminder(b, numberOfDaysLeft);
+        }
+    }
+
+    public void reminder(Bill b, long numberOfDaysLeft) {
+        Users user = usersManager.findOne(b.getUserid());
+        emailService.sendSMS(user.getNumber(), user.getServiceProvider(),
+                billSubject,
+                "Your bill for " + b.getName() + " of amount $" + b.getAmount() + " is due within " + numberOfDaysLeft + " days. \n Bill Due Date: "
+                        + b.getTextFormattedDate());
+        logger.info("BILL - {} notified to USER - {} ::: DUE DATE - {}", b.getName(), user.getId(), b.getTextFormattedDate());
+    }
+
+    public void finalReminder(Bill b, long numberOfDaysLeft) {
+        if (numberOfDaysLeft == -1) {
+            Users user = usersManager.findOne(b.getUserid());
+            emailService.sendSMS(user.getNumber(), user.getServiceProvider(),
+                    billSubject,
+                    "LAST REMINDER: Your bill for " + b.getName() + " of amount $" + b.getAmount() + " has crossed the deadline yesterday. \n Bill Due Date: "
+                            + b.getTextFormattedDate());
+            logger.info("OVER DUE BILL REMINDER - {} notified to USER - {} ::: DUE DATE - {}", b.getName(), user.getId(), b.getTextFormattedDate());
         }
     }
 }

@@ -210,11 +210,29 @@ public class WebController {
         //Get current user from security
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Users currentUser = usersManager.findByEmail(userDetails.getUsername()).get(0);
-        logger.info(userDetails.getUsername());
 
+        //Get All Bills Associated With User
         ArrayList<Bill> userBills = (ArrayList<Bill>) billManager.findByUserid(currentUser.getId());
+        ArrayList<Bill> overDueBills = new ArrayList<>();
+        ArrayList<Bill> paidBills = new ArrayList<>();
+        //Normal Bills under observation for notifications
+        ArrayList<Bill> notificationBills = new ArrayList<>();
+
+        //Filter Bills for OverDue/Paid/Notifiable Bills
+        for (Bill b : userBills) {
+            if(b.getNumberOfDays() < 0 && !b.isStatus()) {
+                overDueBills.add(b);
+            } else if (b.isStatus()) {
+                paidBills.add(b);
+            } else {
+                notificationBills.add(b);
+            }
+        }
+
         ModelAndView modelAndView = new ModelAndView("dashboard");
-        modelAndView.addObject("bills", userBills);
+        modelAndView.addObject("nBills", notificationBills);
+        modelAndView.addObject("pBills", paidBills);
+        modelAndView.addObject("odBills", overDueBills);
         modelAndView.addObject("currentuser", currentUser);
         return modelAndView;
     }

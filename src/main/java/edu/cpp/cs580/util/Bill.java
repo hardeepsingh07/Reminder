@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 /**
@@ -41,6 +44,20 @@ public class Bill {
     public String getTextFormattedDate() {
         SimpleDateFormat output = new SimpleDateFormat("MMM dd, yyyy");
         return output.format(this.getDuedate());
+    }
+
+    public long getNumberOfDays() {
+        //Set Date format and get today's date
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        SimpleDateFormat output = new SimpleDateFormat("yyyy-MM-dd");
+        String todayDate = LocalDate.now().toString();
+        String billDate =  output.format(this.getDuedate());
+
+        LocalDate startDate = LocalDate.parse(todayDate, formatter);
+        LocalDate dueDate = LocalDate.parse(billDate, formatter);
+        long numberOfDaysLeft = ChronoUnit.DAYS.between(startDate, dueDate);
+
+        return numberOfDaysLeft;
     }
 
     public int getId() {
