@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/home")
-//                .defaultSuccessUrl("/dashboard.ftl", true)
+//                .defaultSuccessUrl("/dashboard", true)
                 .permitAll()
                 .and()
                 .logout()
