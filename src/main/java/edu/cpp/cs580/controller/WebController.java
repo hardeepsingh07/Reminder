@@ -133,7 +133,7 @@ public class WebController {
         if(!name.equals(users.getName())) { users.setName(name); }
         if(!email.equals(users.getEmail())) { users.setEmail(email); }
         if(!password.equals("")) { users.setPassword(password); }
-        if(!number.equals(users.getNumber())) { users.setEmail(number); }
+        if(!number.equals(users.getNumber())) { users.setNumber(number); }
         if(!serviceprovider.equals(users.getServiceProvider())) { users.setServiceProvider(serviceprovider); }
 
         try {
