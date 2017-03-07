@@ -1,6 +1,11 @@
 /**
  * Created by hardeepsingh on 2/15/17.
  */
+
+//Global Variable
+var gSP;
+var gNumber;
+
 function addBill() {
     var name = $('#billName').val();
     var amount = $('#billAmount').val();
@@ -73,13 +78,18 @@ function paidBill(id) {
     )
 }
 
-function updateProfile() {
+function updateProfile(currentNumber) {
     var name = $('#mName').val();
     var email = $('#mEmail').val();
     var password = $('#mPassword').val();
     var confirmpassword = $('#mConfirmPassword').val();
     var number = $('#mNumber').val();
     var serviceprovider = $('#mServiceProvider').val();
+
+    if (currentNumber != number) {
+        $("#dialog").dialog();
+    }
+
 
     if (password === confirmpassword) {
         $.ajax(
@@ -124,14 +134,83 @@ function clearBills() {
                 } else {
                     console.log("All Bills Deleted!!");
                     setTimeout(
-                        function() {
+                        function () {
                             location.reload();
                         }, 1500);
                 }
             },
             error: function (jgHXR, Exception) {
-               console.log("Error: Couldn't process the request");
+                console.log("Error: Couldn't process the request");
             }
         }
     )
+}
+
+function sendCode() {
+    var number = $('#newNumber').val();
+    var sp = $("#newSP").val();
+
+    if (number && sp) {
+        $("#vNewButton").prop("disabled", true);
+        $("#vNewButton").attr('value', 'Sending Code...');
+        $.ajax(
+            {
+                type: "GET",
+                url: "/validateNewNumber/" + number,
+                data: {
+                    "sp": sp
+                },
+                success: function (result) {
+                    if (result === "error") {
+                        console.log("Error occurred while sending code, Try again!");
+                        $("#vNewButton").prop("disabled", false);
+                    } else {
+                        $("#vNewButton").prop('value', 'Code Sent!');
+                        console.log("Verification Code Sent");
+                    }
+                },
+                error: function (jgHXR, Exception) {
+                    $("#vNewButton").prop("disabled", false);
+                    console.log("Error: Couldn't process the request");
+                }
+            }
+        )
+    } else {
+        alert("Please provide all the information and Try again!");
+    }
+}
+
+function verifyCode() {
+    var code = $('#newVCode').val();
+
+    if(code) {
+        $("#vNewCodeB").prop("disabled", true);
+        $.ajax( {
+            type : "GET",
+            url  : "/validateCode/" + code,
+            data : {},
+            success : function (result) {
+                if(result  === 'invalid') {
+                    $("#vNewCodeB").prop("disabled", false);
+                    alert("Verification code invalid, Try again!");
+                } else {
+                    gNumber = $('#newNumber').val();
+                    gSP = $("#newSP").val();
+                    $("#vNewCodeB").prop('value', 'Verified!!');
+                }
+            },
+            error : function (jgHXR, exception) {
+                $("#vNewCodeB").prop("disabled", false);
+                alert("Failed to process data, Error Occurred");
+            }
+        });
+    } else {
+        alert("Please provide all the information and Try again!");
+    }
+}
+
+function passData() {
+    gNumber = $('#newNumber').val();
+    gSP = $("#newSP").val();
+    $("#mNumber").attr('value', gNumber);
 }

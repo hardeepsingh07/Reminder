@@ -55,7 +55,7 @@ public class WebController {
                     @RequestParam("rNumber") String rNumber) {
 
         try {
-            String code = service.registerUser(rName, rEmail, rProvider, rNumber);
+            String code = service.registerUser(rName, rProvider, rNumber, true);
 
             //save to the database make a new entry
             Users users = new Users(rName, rEmail, rPassword, rProvider, rNumber, code, false);
@@ -66,6 +66,7 @@ public class WebController {
         }
         return "success";
     }
+
 
     //Verify Code
     @RequestMapping(value = "/validateCode/{vCode}", method = RequestMethod.GET)
@@ -133,12 +134,32 @@ public class WebController {
         if(!name.equals(users.getName())) { users.setName(name); }
         if(!email.equals(users.getEmail())) { users.setEmail(email); }
         if(!password.equals("")) { users.setPassword(password); }
-        if(!number.equals(users.getNumber())) { users.setNumber(number); }
+        if(!number.equals(users.getNumber())) { users.setNumber(number);}
         if(!serviceprovider.equals(users.getServiceProvider())) { users.setServiceProvider(serviceprovider); }
 
         try {
             usersManager.save(users);
         } catch (Exception e) {
+            return "error";
+        }
+        return "success";
+    }
+
+    @RequestMapping(value="/validateNewNumber/{number}", method = RequestMethod.GET)
+    String updateNewNumber(@PathVariable("number") String number,
+                            @RequestParam("sp") String sp) {
+        try {
+            //Get current user from security
+            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            Users users = usersManager.findByEmail(userDetails.getUsername()).get(0);
+
+            String code = service.registerUser(users.getName(), sp, number, false);
+
+            //store to user table but do not store number and service provider yet
+            users.setVcode(code);
+            usersManager.save(users);
+        } catch (Exception e) {
+            System.out.println(e.toString());
             return "error";
         }
         return "success";

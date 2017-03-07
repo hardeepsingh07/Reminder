@@ -33,7 +33,8 @@ public class EmailService {
         javaMailSender.send(mailMessage);
     }
 
-    public String registerUser(String name, String email, String provider, String number) {
+    //If true --- New Registration and False -- Change in Number validation
+    public String registerUser(String name, String provider, String number, boolean trigger) {
         String dAddresss = getSMSAddress(provider, number);
 
         Random r = new Random();
@@ -46,7 +47,11 @@ public class EmailService {
         mailMessage.setTo(dAddresss);
         mailMessage.setFrom(appEmail);
         mailMessage.setSubject("Verification Code: " + result);
-        mailMessage.setText(name + ", Thank you for registering with Reminder");
+        if(trigger) {
+            mailMessage.setText(name + ", Thank you for registering with Reminder");
+        } else {
+            mailMessage.setText(name + ", your new validation code profile update");
+        }
 
         javaMailSender.send(mailMessage);
 

@@ -46,7 +46,6 @@ public class Scheduler {
             //If 7 days left, remind once, if status is not paid (false)
             long numberOfDaysLeft = b.getNumberOfDays();
             boolean isPaid = b.isStatus();
-            logger.info("Status: {} and Days: {}", isPaid, numberOfDaysLeft);
             if (!isPaid && numberOfDaysLeft <= 7 && numberOfDaysLeft >= 0) {
                 reminder(b, numberOfDaysLeft);
             }

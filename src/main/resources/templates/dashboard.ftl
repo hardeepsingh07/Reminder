@@ -38,6 +38,9 @@
 
     <!-- Include jQuery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <!-- Include Date Range Picker -->
     <script type="text/javascript"
@@ -146,20 +149,20 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="mNumber">Number</label>
-                                    <input type="number" class="form-control"
+                                    <input type="number" data-toggle="modal" data-target="#myModal" class="form-control"
                                            id="mNumber" placeholder="Enter Mobile Number"
                                            value="${currentuser.number}"/>
                                 </div>
-                                <div class="form-group">
-                                    <label for="mServiceProvider">Password</label>
-                                    <select class="form-control" id="mServiceProvider">
-                                        <option>Verizon</option>
-                                        <option>Sprint</option>
-                                        <option>ATT</option>
-                                        <option>TMobile</option>
-                                        <option>Virgin Mobile</option>
-                                    </select>
-                                </div>
+                                <#--<div class="form-group">-->
+                                    <#--<label for="mServiceProvider">Service Provider</label>-->
+                                    <#--<select class="form-control" id="mServiceProvider">-->
+                                        <#--<option>Verizon</option>-->
+                                        <#--<option>Sprint</option>-->
+                                        <#--<option>ATT</option>-->
+                                        <#--<option>TMobile</option>-->
+                                        <#--<option>Virgin Mobile</option>-->
+                                    <#--</select>-->
+                                <#--</div>-->
 
                                 <div class="form-group">
                                     <button class="btn btn-danger btn-md btn-block" onclick="clearBills()">Clear All
@@ -177,13 +180,70 @@
                             data-dismiss="modal">
                         Close
                     </button>
-                    <button type="button" class="btn btn-primary" onclick="updateProfile()">
+                    <button type="button" class="btn btn-primary" onclick="updateProfile(${currentuser.number})">
                         Save changes
                     </button>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Phone Number Validation Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Phone Number Validation</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="newNumber">New Number</label>
+                                    <input type="text" class="form-control"
+                                           id="newNumber" placeholder="New Number"/>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="newSP">Service Provider</label>
+                                    <select class="form-control" id="newSP">
+                                        <option>Verizon</option>
+                                        <option>Sprint</option>
+                                        <option>ATT</option>
+                                        <option>TMobile</option>
+                                        <option>Virgin Mobile</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-md btn-block" id="vNewButton" onclick="sendCode()">Send Validation Code</button>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="newVCode">Verification Code</label>
+                                    <input type="text" class="form-control"
+                                           id="newVCode" placeholder="New Number"/>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-success btn-md btn-block" id="vNewCodeB" onclick="verifyCode()">Verify!</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="passData()" disabled>Done!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     <div id="page-wrapper">
 
