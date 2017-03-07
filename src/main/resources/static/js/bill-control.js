@@ -133,10 +133,8 @@ function clearBills() {
                     console.log("Error occurred while deleting, Try again!");
                 } else {
                     console.log("All Bills Deleted!!");
-                    setTimeout(
-                        function () {
-                            location.reload();
-                        }, 1500);
+                    location.reload();
+                    location.reload();
                 }
             },
             error: function (jgHXR, Exception) {
@@ -152,7 +150,7 @@ function sendCode() {
 
     if (number && sp) {
         $("#vNewButton").prop("disabled", true);
-        $("#vNewButton").attr('value', 'Sending Code...');
+        $("#vNewButton").html("Sending Code...");
         $.ajax(
             {
                 type: "GET",
@@ -165,7 +163,8 @@ function sendCode() {
                         console.log("Error occurred while sending code, Try again!");
                         $("#vNewButton").prop("disabled", false);
                     } else {
-                        $("#vNewButton").prop('value', 'Code Sent!');
+                        $("#vNewButton").html("Code Sent!");
+                        $("#vNewCodeB").prop("disabled", false);
                         console.log("Verification Code Sent");
                     }
                 },
@@ -196,7 +195,8 @@ function verifyCode() {
                 } else {
                     gNumber = $('#newNumber').val();
                     gSP = $("#newSP").val();
-                    $("#vNewCodeB").prop('value', 'Verified!!');
+                    $("#vNewCodeB").html("Verified!");
+                    $("#doneButton").prop("disabled", false);
                 }
             },
             error : function (jgHXR, exception) {
@@ -213,4 +213,18 @@ function passData() {
     gNumber = $('#newNumber').val();
     gSP = $("#newSP").val();
     $("#mNumber").attr('value', gNumber);
+
+    $("#myModal .close").click();
+
+    $('#newNumber').val("");
+    $('#newVCode').val("");
+    $("#vNewButton").html("Send Validation Code");
+    $("#vNewCodeB").html("Verify!");
 }
+
+function disableButton() {
+    $("#vNewButton").prop("disabled", false);
+    $("#vNewCodeB").prop("disabled", true);
+    $("#doneButton").prop("disabled", true);
+}
+

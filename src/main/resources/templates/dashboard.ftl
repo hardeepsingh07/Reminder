@@ -150,7 +150,7 @@
                                 <div class="form-group">
                                     <label for="mNumber">Number</label>
                                     <input type="number" data-toggle="modal" data-target="#myModal" class="form-control"
-                                           id="mNumber" placeholder="Enter Mobile Number"
+                                           id="mNumber" placeholder="Enter Mobile Number" onclick="disableButton()"
                                            value="${currentuser.number}"/>
                                 </div>
                                 <#--<div class="form-group">-->
@@ -237,7 +237,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="passData()" disabled>Done!</button>
+                    <button type="button" class="btn btn-primary" onclick="passData()">Done!</button>
                 </div>
             </div>
         </div>
